@@ -1,0 +1,26 @@
+// * MIXINS
+
+@charset 'utf-8'
+
+@import 'globals'
+@import 'helpers'
+
+=font-style($family: default, $size: default, $weight: regular)
+  $typography: typography($family, $size, $weight)
+  font-family: get($typography, family)
+  font-size: #{get($typography, size)}px
+  font-weight: get($typography, weight)
+
+=text-style($family: default, $size: default, $weight: regular, $line-height: 24px)
+  +font-style($family, $size, $weight)
+  line-height: $line-height
+
+=column($number)
+  @if $number != 0
+    width: (($number/$columns)*100)*1%
+  @else
+    width: 100%
+
+=media($size)
+  @media screen and (max-width: #{$size}px)
+    @content

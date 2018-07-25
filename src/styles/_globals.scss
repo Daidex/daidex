@@ -1,0 +1,56 @@
+// * GLOBALS
+
+@charset 'utf-8';
+
+// COLORS
+$black-color: #000000;
+$white-color: #ffffff;
+$transparent-color: rgba(0, 0, 0, 0);
+$default-color: #52646D;
+$primary-color: #00BB46;
+$dark-color: #32414A;
+$gray-color: #616161;
+$colors: (black: $black-color, white: $white-color, transparent: $transparent-color, default: $default-color, primary: $primary-color, dark: $dark-color);
+
+// TYPOGRAPHY
+// Font families
+$arial: 'Arial', sans-serif;
+$source_code_pro: 'Source Code Pro';
+
+// Font sizes
+$default-font-size: 16;
+$large-font-size: 18;
+$small-font-size: 9;
+
+// Heading sizes
+$h1-font-size: 89;
+$h2-font-size: 67;
+$h3-font-size: 50;
+$h4-font-size: 37;
+$h5-font-size: 28;
+$h6-font-size: 21;
+
+// Typography maps
+$font-families: (default: 'Arial', monospace: $source_code_pro);
+$font-sizes: (default: $default-font-size, large: $large-font-size, small: $small-font-size, h1: $h1-font-size, h2: $h2-font-size, h3: $h3-font-size, h4: $h4-font-size, h5: $h5-font-size, h6: $h6-font-size);
+$font-weights: (regular: 400, medium: 500, bold: 700);
+
+// Typography global variable
+$typography: (families: $font-families, sizes: $font-sizes, weights: $font-weights);
+
+// GRID
+// Breakpoints
+$fourk: 2560;
+$uhd: 1440;
+$hd: 1280;
+$lg: 1024;
+$md: 768;
+$sm: 480;
+$xs: 320;
+
+$breakpoints: (fourk: $fourk, uhd: $uhd, hd: $hd, lg: $lg, md: $md, sm: $sm, xs: $xs);
+
+$columns: 12;
+
+// Custom
+$px: .0625rem;

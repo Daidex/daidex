@@ -1,0 +1,40 @@
+// * HELPERS
+
+@charset 'utf-8'
+
+@import 'globals'
+
+@function get($map, $key, $name: 'map')
+  @if map-has-key($map, $key)
+    @return map-get($map, $key)
+  @warn 'Unknown `#{$key}` in `#{$name}`.'
+  @return null
+
+@function typography($family: default, $size: default, $weight: regular)
+  $families: get($typography, families, 'typography')
+  $sizes: get($typography, sizes, 'typography')
+  $weights: get($typography, weights, 'typography')
+  @if $families != null and $sizes != null and $weights != null
+    @return (family: get($families, $family, 'typography-families'), size: get($sizes, $size, 'typography-sizes'), weight: get($weights, $weight, 'typography-weights'))
+  @warn 'Unknown `#{$family}` or `#{$size}` in typography.'
+  @return null
+
+@function size($value: 1, $unit: null)
+  @if $unit != null
+    @return #{$value}#{$unit}
+  @return $value * $px
+
+@function mapReverse($map)
+  $result: null
+  @if type-of($map) == "map"
+    $keys: map-keys($map)
+    $map-reversed: ()
+    @for $i from length($keys) through 1
+      $map-reversed: map-merge($map-reversed, (nth($keys, $i): map-get($map, nth($keys, $i))))
+    @if type-of($map-reversed) == "map"
+      $result: $map-reversed
+    @else
+      @warn 'There was an error reversing the order of "#{$map}"'
+  @else
+    @warn '"#{$map}" is not a valid map'
+  @return $result
