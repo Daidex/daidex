@@ -5,7 +5,8 @@ import store from 'src/store';
 
 import CoreLayout from 'src/components/Layouts/CoreLayout'
 
-import Link from 'src/components/Atoms/Link';
+import Link from 'src/components/Atoms/Link'
+import Button from 'src/components/Atoms/Button'
 
 const App = () => (
   <Provider store={store}>
@@ -13,6 +14,9 @@ const App = () => (
       <Link href="https://radarrelay.com" disabled>
         Radar Relay
       </Link>
+      <Button theme="orange" onClick={() => console.log('clicked')}>
+        Sell Now
+      </Button>
     </CoreLayout>
   </Provider>
 )

@@ -1,0 +1,30 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.base
+  font-size: $default-font-size
+  color: $white-color
+  font-size: size(14)
+  padding: size(1, 'em')
+  border-radius: size(3)
+  margin: size(5)
+  border: none
+  outline: 0
+  &:active
+    transform: scale(0.97)
+
+
+.default
+  composes: base
+  background-image: $blue-gradient
+  transition: all 0.3s ease-in
+
+.orange
+  composes: base
+  background-color: $orange
+
+.disabled
+  composes: base
+  background: $gray-color 
+  cursor: not-allowed

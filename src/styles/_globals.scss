@@ -12,8 +12,13 @@ $default-color: #52646D;
 $primary-color: #00BB46;
 $dark-color: #32414A;
 $gray-color: #616161;
+$orange: #FF7908;
 $blue-dark: #212334;
+$green-color: #00e5eb;
 $colors: (black: $black-color, white: $white-color, transparent: $transparent-color, default: $default-color, primary: $primary-color, dark: $dark-color);
+
+// GRADIENT
+$blue-gradient: linear-gradient(-136deg, rgb(0, 255, 182) 5%, rgb(0, 220, 255) 93%);
 
 // TYPOGRAPHY
 // Font families

@@ -11,7 +11,7 @@ const Link = ({
   const classNames = classnames({
     [get(styles, theme, 'default')]: true,
     [styles.disabled]: disabled,
-    [className]: className,
+    [className]: !!className,
   })
 
   return (
