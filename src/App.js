@@ -7,6 +7,7 @@ import CoreLayout from 'src/components/Layouts/CoreLayout'
 
 import Link from 'src/components/Atoms/Link'
 import Button from 'src/components/Atoms/Button'
+import Text from 'src/components/Atoms/Text'
 
 const App = () => (
   <Provider store={store}>
@@ -17,6 +18,9 @@ const App = () => (
       <Button theme="orange" onClick={() => console.log('clicked')}>
         Sell Now
       </Button>
+      <Text theme="title">
+        Trade ERC20 tokens using your own wallet
+      </Text>
     </CoreLayout>
   </Provider>
 )
