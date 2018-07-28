@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import classnames from 'classnames'
+import { Link as RouteLink } from 'react-router-dom'
 
 import styles from './LinkStyles.sass'
 
 const Link = ({
-  href, children, className, theme, disabled, ...rest
+  href, to, children, className, theme, disabled, ...rest
 }) => {
   const classNames = classnames({
     [get(styles, theme, 'default')]: true,
@@ -14,19 +15,29 @@ const Link = ({
     [className]: !!className,
   })
 
-  return (
-    <a
-      href={!disabled ? href : null}
-      className={classNames}
-      {...rest}
-    >
-      {children}
-    </a>
-  )
+  return to
+    ? (
+      <RouteLink
+        to={!disabled ? to : null}
+        className={classNames}
+        {...rest}
+      >
+        {children}
+      </RouteLink>
+    ) : (
+      <a
+        href={!disabled ? href : null}
+        className={classNames}
+        {...rest}
+      >
+        {children}
+      </a>
+    )
 }
 
 Link.propTypes = {
-  href: PropTypes.string.isRequired,
+  to: PropTypes.string,
+  href: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   theme: PropTypes.string,
@@ -36,7 +47,9 @@ Link.propTypes = {
 Link.defaultProps = {
   theme: 'default',
   disabled: false,
-  className: ''
+  className: '',
+  href: '',
+  to: '',
 }
 
 export default Link;

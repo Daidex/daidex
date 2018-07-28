@@ -24,7 +24,10 @@ Navbar.defaultProps = {
 
 Navbar.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.instanceOf(Link)).isRequired,
-}
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.instanceOf(Link)),
+  ]).isRequired
+};
 
 export default Navbar

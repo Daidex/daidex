@@ -1,43 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import CoreLayout from 'src/components/Layouts/CoreLayout';
 
 import store from 'src/store';
-
-import CoreLayout from 'src/components/Layouts/CoreLayout'
-
-import Link from 'src/components/Atoms/Link'
-import Button from 'src/components/Atoms/Button'
-import Text from 'src/components/Atoms/Text'
-
-import Navbar from 'src/components/Molecules/Navbar'
+import routes, { renderRoutes } from 'src/routes';
 
 const App = () => (
   <Provider store={store}>
-    <CoreLayout>
-      <Link href="https://radarrelay.com" disabled>
-        Radar Relay
-      </Link>
-      <Button theme="orange" onClick={() => console.log('clicked')}>
-        Sell Now
-      </Button>
-      <Text theme="title">
-        Trade ERC20 tokens using your own wallet
-      </Text>
-      <Navbar>
-        <Link href="https://radarrelay.com">
-          Exchange
-        </Link>
-        <Link href="https://radarrelay.com">
-          How it works
-        </Link>
-        <Link href="https://radarrelay.com">
-          Terms
-        </Link>
-        <Link href="https://radarrelay.com">
-          Contract
-        </Link>
-      </Navbar>
-    </CoreLayout>
+    <BrowserRouter>
+      <CoreLayout>
+        {renderRoutes(routes)}
+      </CoreLayout>
+    </BrowserRouter>
   </Provider>
 )
 
