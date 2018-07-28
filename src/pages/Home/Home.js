@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 
-import Text from 'src/components/Atoms/Text'
+import Row from 'src/components/Atoms/Row'
+
+import styles from './HomeStyles.sass'
 
 class Home extends Component {
   componentDidMount() {}
 
   render() {
     return (
-      <Text theme="title">
+      <Row className={styles.container}>
         Home!
-      </Text>
+      </Row>
     )
   }
 }

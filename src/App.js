@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+// import 'assets/img/favicon.ico'
 
 import CoreLayout from 'src/components/Layouts/CoreLayout';
 

@@ -7,7 +7,8 @@ const DEV = process.env.NODE_ENV !== 'production';
 
 const htmlPlugin = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, 'src/index.html'),
-  filename: 'index.html'
+  filename: 'index.html',
+  favicon: 'assets/img/favicon.ico',
 })
 
 const miniCssPlugin = new MiniCssExtractPlugin({
@@ -20,7 +21,8 @@ const miniCssPlugin = new MiniCssExtractPlugin({
 module.exports = {
   resolve: {
     alias: {
-      src: path.resolve(__dirname, 'src')
+      src: path.resolve(__dirname, 'src'),
+      assets: path.resolve(__dirname, 'assets'),
     }
   },
   optimization: {

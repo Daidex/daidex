@@ -67,3 +67,7 @@ $px: .0625rem;
 body {
   font-family: $oxygen;
 }
+
+img:not([alt]) {
+  filter: grayscale(100%)
+}
