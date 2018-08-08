@@ -1,11 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Row from 'src/components/Atoms/Row'
+
 import styles from './CoreLayoutStyles.sass'
 
 const CoreLayout = ({ children }) => (
   <section className={styles.layout}>
-    {children}
+    <Row className={styles.children} spacing={{ bottom: 0, top: 0 }}>
+      {children}
+    </Row>
   </section>
 )
 

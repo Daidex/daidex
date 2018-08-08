@@ -1,0 +1,24 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.base
+  font-family: $quicksand
+  font-size: size($default-font-size)
+  color: $black-color
+  margin: size(0.8, 'em') 0,
+
+.default
+  composes: base
+
+.title
+  composes: base
+  font-family: $maven-pro
+  font-size: size($h6-font-size)
+  color: $white-color
+  font-weight: regular
+
+.h1
+  composes: title
+  font-size: size($h1-font-size)
+  margin: 0

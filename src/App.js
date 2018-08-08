@@ -1,19 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+// import 'assets/img/favicon.ico'
+
+import CoreLayout from 'src/components/Layouts/CoreLayout';
 
 import store from 'src/store';
-
-import CoreLayout from 'src/components/Layouts/CoreLayout'
-
-import Link from 'src/components/Atoms/Link';
+import routes, { renderRoutes } from 'src/routes';
 
 const App = () => (
   <Provider store={store}>
-    <CoreLayout>
-      <Link href="https://radarrelay.com" disabled>
-        Radar Relay
-      </Link>
-    </CoreLayout>
+    <BrowserRouter>
+      <CoreLayout>
+        {renderRoutes(routes)}
+      </CoreLayout>
+    </BrowserRouter>
   </Provider>
 )
 

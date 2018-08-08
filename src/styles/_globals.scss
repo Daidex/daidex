@@ -2,7 +2,7 @@
 
 @charset 'utf-8';
 
-@import url(https://fonts.googleapis.com/css?family=Oxygen:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,700|Quicksand);
 
 // COLORS
 $black-color: #000000;
@@ -11,14 +11,20 @@ $transparent-color: rgba(0, 0, 0, 0);
 $default-color: #52646D;
 $primary-color: #00BB46;
 $dark-color: #32414A;
-$gray-color: #616161;
+$gray-color: #808080;
+$orange: #FF7908;
 $blue-dark: #212334;
+$green-color: #50ffb8;
 $colors: (black: $black-color, white: $white-color, transparent: $transparent-color, default: $default-color, primary: $primary-color, dark: $dark-color);
+
+// GRADIENT
+$blue-gradient: linear-gradient(-136deg, rgb(0, 255, 182) 5%, rgb(0, 220, 255) 93%);
 
 // TYPOGRAPHY
 // Font families
 $arial: 'Arial', sans-serif;
-$oxygen: 'Oxygen';
+$maven-pro: 'Maven Pro';
+$quicksand: 'Quicksand';
 $source_code_pro: 'Source Code Pro';
 
 // Font sizes
@@ -27,12 +33,12 @@ $large-font-size: 18;
 $small-font-size: 9;
 
 // Heading sizes
-$h1-font-size: 89;
-$h2-font-size: 67;
-$h3-font-size: 50;
-$h4-font-size: 37;
-$h5-font-size: 28;
-$h6-font-size: 21;
+$h1-font-size: 38;
+$h2-font-size: 34;
+$h3-font-size: 30;
+$h4-font-size: 28;
+$h5-font-size: 24;
+$h6-font-size: 20;
 
 // Typography maps
 $font-families: (default: 'Arial', monospace: $source_code_pro);
@@ -60,5 +66,9 @@ $columns: 12;
 $px: .0625rem;
 
 body {
-  font-family: $oxygen;
+  font-family: $quicksand;
+}
+
+img:not([alt]) {
+  filter: grayscale(100%)
 }
