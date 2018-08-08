@@ -13,10 +13,19 @@
   &:active
     transform: scale(0.97)
 
-
 .default
   composes: base
   background-image: $blue-gradient
+  transition: all 0.3s ease-in
+
+.primary
+  composes: base
+  font-size: size($h6-font-size)
+  background-color: $green-color
+  border-radius: size(40)
+  padding: size(0.5,'em') size(2.5,'em')
+  box-shadow: 5px 5px 20px rgba($black-color, 0.5);
+  color: $black-color
   transition: all 0.3s ease-in
 
 .orange

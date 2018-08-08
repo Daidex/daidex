@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Row = ({
+const Col = ({
   spacing, children, style, ...rest
 }) => (
   <div
     style={{
-      paddingTop: `${spacing.top}px`,
-      paddingBottom: `${spacing.bottom}px`,
+      paddingLeft: `${spacing.left}px`,
+      paddingRight: `${spacing.right}px`,
       ...style,
     }}
     {...rest}
@@ -16,19 +16,19 @@ const Row = ({
   </div>
 )
 
-Row.defaultProps = {
+Col.defaultProps = {
   spacing: {
-    top: 5,
-    bottom: 5,
+    left: 5,
+    right: 5,
   },
   style: {}
 }
 
-Row.propTypes = {
+Col.propTypes = {
   spacing: PropTypes.shape({}),
   children: PropTypes.node.isRequired,
   style: PropTypes.shape({}),
 }
 
 
-export default Row
+export default Col

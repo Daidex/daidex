@@ -3,5 +3,25 @@
 @import 'src/styles/resources'
 
 .container
-  background-color: $white-color
+  border-color: $white-color
   margin: size(2, 'em')
+  display: flex
+  width: 100%
+  justify-content: space-around
+  align-items: center 
+  max-width: size($hd)
+  height: calc(100vh - size(2, 'em'))
+
+.content
+  flex: 1
+  max-width: size(500)
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  text-align: right
+  justify-content: center
+
+.title
+  max-width: 80%
+.description
+  color: $green-color
