@@ -4,29 +4,33 @@ import {
   combineReducers,
   applyMiddleware,
   compose,
-} from 'redux';
-import thunk from 'redux-thunk';
+} from 'redux'
+import { createBrowserHistory } from 'history'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import thunk from 'redux-thunk'
 
-import appReducer from 'src/store/reducers/appReducer';
+import appReducer from 'src/store/reducers/appReducer'
 
-
-const middleware = [thunk];
+export const history = createBrowserHistory()
+const middleware = [thunk, routerMiddleware(history)]
 
 /* eslint-disable */
 
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-: compose;
+: compose
 
 /* eslint-enable */
 
 const enhancer = composeEnhancers(
   applyMiddleware(...middleware),
-);
+)
+
+const rootReducer = combineReducers({
+  app: appReducer,
+})
 
 export default createStore(
-  combineReducers({
-    app: appReducer,
-  }),
+  connectRouter(history)(rootReducer),
   enhancer,
-);
+)
