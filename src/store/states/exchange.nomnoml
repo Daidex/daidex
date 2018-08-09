@@ -1,0 +1,36 @@
+#spacing: 80
+#padding: 15
+#arrowSize: 0.5
+#edgeMargin: 0.5
+// hasMetaMask
+// isEnabledMetaMask
+// isMetaMaskMainNet
+// isThereError
+// hasBalanceWithAnyToken
+// ============
+// views:
+// connectingWithMetaMask | metaMaskIsRequired | metaMaskIsNotMainNet | metaMaskFailToConnect | exchange | exchangeWithError | exchangeWrap
+
+// Exchange State Machine
+[<start> view]->[<state> connectingWithMetaMask]
+[<state> connectingWithMetaMask]->[<choice> hasMetaMask]
+[<choice> hasMetaMask]->YES[<choice> isEnabledMetaMask]
+[<choice> hasMetaMask]->NO[<state> metaMaskIsRequired]
+[<choice> isEnabledMetaMask]->YES[<choice> isMetaMaskMainNet]
+[<choice> isEnabledMetaMask]->NO[<state> metaMaskFailToConnect]
+[<choice> isMetaMaskMainNet]->YES[<choice> hasBalanceWithAnyToken]
+[<choice> isMetaMaskMainNet]-NO[<state> metaMaskIsNotMainNet]
+[<choice> hasBalanceWithAnyToken]->YES[<state> exchange]
+[<choice> hasBalanceWithAnyToken]->NO[<state> exchangeWrap]
+[<state> exchange]->[<choice> isThereError]
+[<choice> isThereError]->YES[<state> exchangeWithError]
+
+
+
+
+
+
+
+
+
+
