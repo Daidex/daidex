@@ -6,6 +6,7 @@ import Text from 'src/components/Atoms/Text'
 import Button from 'src/components/Atoms/Button'
 
 import logo from 'assets/img/daidex-logo.png'
+import desktop from 'assets/img/desktop.png'
 
 import styles from './HomeStyles.sass'
 
@@ -33,8 +34,8 @@ class Home extends Component {
             </Button>
           </Row>
         </Col>
-        <Col className={styles.content}>
-          {/* MetaMask */}
+        <Col className={styles.content} spacing={{ left: 20 }}>
+          <img src={desktop} className={styles.desktopImage} alt="daidex website" />
         </Col>
       </Row>
     )
