@@ -1,21 +1,37 @@
-import { TOGGLE_LOADER } from 'src/store/actions/appActions';
-import { setToState } from 'src/utils';
+import {
+  TOGGLE_LOADING,
+  CHANGE_VIEW
+} from 'src/store/actions/appActions'
+import appStates from 'src/store/states/appStates'
+import { setToState } from 'src/utils'
 
 export const initialState = {
   ui: {
-    loading: false,
+    view: appStates.view.connectingWithMetaMask,
+    previousView: appStates.view.connectingWithMetaMask,
+    loading: false
   },
-  data: {},
-};
+  data: {
+    wallet: {
+      loaded: false
+    }
+  }
+}
 
 export default function appReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case TOGGLE_LOADER:
+    case TOGGLE_LOADING:
       return setToState(state, {
-        'ui.loading': !state.ui.loading,
-      });
+        'ui.loading': !state.ui.isLoading
+      })
+
+    case CHANGE_VIEW:
+      return setToState(state, {
+        'ui.view': action.payload.nextView,
+        'ui.previousView': state.ui.view,
+      })
 
     default:
-      return state;
+      return state
   }
 }
