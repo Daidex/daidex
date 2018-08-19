@@ -75,5 +75,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [htmlPlugin, miniCssPlugin]
+  plugins: [htmlPlugin, miniCssPlugin],
+  devServer: {
+    historyApiFallback: true
+  }
 };

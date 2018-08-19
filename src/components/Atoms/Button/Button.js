@@ -1,30 +1,52 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import { get } from 'lodash'
 
 import styles from './ButtonStyles.sass'
 
-const Button = ({
-  type, theme, className, children, disabled, onClick, ...rest
-}) => {
-  const classNames = classnames({
-    [get(styles, theme, 'default')]: true,
-    [styles.disabled]: disabled,
-    [className]: !!className,
-  })
+class Button extends Component {
+  renderLink = (classNames) => {
+    const {
+      children, to,
+    } = this.props
 
-  return (
-    <button
-      type={type}
-      className={classNames}
-      disabled={disabled}
-      onClick={!disabled ? onClick : () => {}}
-      {...rest}
-    >
-      {children}
-    </button>
-  )
+    return (
+      <Link
+        className={classNames}
+        to={to}
+      >
+        {children}
+      </Link>
+    )
+  }
+
+  render() {
+    const {
+      type, theme, className, children, disabled, onClick, to, ...rest
+    } =  this.props
+
+    const classNames = classnames({
+      [get(styles, theme, 'default')]: true,
+      [styles.disabled]: disabled,
+      [className]: !!className,
+    })
+
+    return (
+      to ? this.renderLink(classNames) : (
+        <button
+          type={type}
+          className={classNames}
+          disabled={disabled}
+          onClick={!disabled ? onClick : () => {}}
+          {...rest}
+        >
+          {children}
+        </button>
+      )
+    )
+  }
 }
 
 Button.propTypes = {
@@ -33,10 +55,13 @@ Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  to: PropTypes.string,
 }
 
 Button.defaultProps = {
+  to: '',
+  onClick: () => {},
   theme: 'default',
   className: '',
   type: 'button',
