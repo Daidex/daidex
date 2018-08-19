@@ -87,6 +87,14 @@
       0,
       "never"
     ],
+    "react/jsx-one-expression-per-line": [
+      0,
+      "never"
+    ],
+    "react/destructuring-assignment": [
+      0,
+      "never"
+    ],
     "react/forbid-prop-types": [
       0,
       "never"
