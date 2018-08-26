@@ -24,7 +24,6 @@ class Exchange extends Component {
   static propTypes = {
     wallet: PropTypes.shape({}).isRequired,
     view: PropTypes.string.isRequired,
-    previousView: PropTypes.string.isRequired,
     changeView: PropTypes.func.isRequired,
     setNetwork: PropTypes.func.isRequired,
     setWallet: PropTypes.func.isRequired,
@@ -89,13 +88,21 @@ class Exchange extends Component {
     }, 1000)
   }
 
+  shouldShowMetaMaskError = (view) => {
+    return (
+      view === appStates.view.metaMaskFailToConnect
+      || view === appStates.view.metaMaskIsRequired
+      || view === appStates.view.metaMaskIsNotMainNet
+    )
+  }
+
   render() {
-    const { view, previousView } = this.props
+    const { view } = this.props
 
     return (
       <Row>
         <Header />
-        <MetaMaskWithError view={view} previousView={previousView} />
+        {this.shouldShowMetaMaskError(view) && <MetaMaskWithError />}
       </Row>
     )
   }
