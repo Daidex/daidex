@@ -1,3 +1,6 @@
 {
-  "default": "parece que no hemos logrado conectar con tu wallet METAMASK, si ya tienes un wallet tan solo habilitalo e intenta de nuevo, de lo contrario podemos ayudarte a instarlo y configurarlo para que puedas disfrutar de las ventajas que Daidex te ofrece." 
+  "default": "parece que no hemos logrado conectar con tu wallet METAMASK, si ya tienes un wallet tan solo habilitalo e intenta de nuevo, de lo contrario podemos ayudarte a instarlo y configurarlo para que puedas disfrutar de las ventajas que Daidex te ofrece.",
+  "install_meta_mask": "Para poder usar Daidex necesitas tener la wallet de MetaMask en el navegador, puedes instalarla e intentar de nuevo.",
+  "unclock_meta_mask": "Para poder usar Daidex necesitas tener desbloqueada tu wallet de MetaMask, desbloqueala para continuar.",
+  "network_not_allowed": "Tu wallet esta en una red de pruebas, cambia a Mainnet para poder usar Daidex." 
 }
