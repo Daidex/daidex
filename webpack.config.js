@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin  = require('optimize-css-assets-webpack-plugin')
@@ -17,6 +18,11 @@ const miniCssPlugin = new MiniCssExtractPlugin({
   filename: DEV ? '[name].css' : '[name].[hash].css',
   chunkFilename: DEV ? '[id].css' : '[id].[hash].css',
 })
+
+const definePlugin = new webpack.DefinePlugin({
+  __DEV__: DEV
+})
+const hotPlugin = new webpack.HotModuleReplacementPlugin()
 
 module.exports = {
   resolve: {
@@ -48,6 +54,9 @@ module.exports = {
         use: [
           {
             loader: DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            }
           },
           {
             loader: 'css-loader',
@@ -75,5 +84,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [htmlPlugin, miniCssPlugin]
+  plugins: [
+    definePlugin, hotPlugin, htmlPlugin, miniCssPlugin
+  ],
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+  },
+  devtool: 'source-map',
 };

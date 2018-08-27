@@ -16,3 +16,9 @@ export const setToState = (state, nextValue) => {
   });
   return nextState;
 };
+
+export const isMetaMask = () => {
+  return (
+    typeof window.web3 !== 'undefined' && window.web3.currentProvider.isMetaMask
+  )
+}

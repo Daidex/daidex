@@ -6,6 +6,7 @@ const Row = ({
 }) => (
   <div
     style={{
+      flex: 1,
       paddingTop: `${spacing.top}px`,
       paddingBottom: `${spacing.bottom}px`,
       ...style,

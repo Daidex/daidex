@@ -29,7 +29,7 @@ class Home extends Component {
             </Text>
           </Row>
           <Row>
-            <Button theme="primary" onClick={() => {}}>
+            <Button theme="primary" to="/exchange">
               TAKE ME IN
             </Button>
           </Row>
