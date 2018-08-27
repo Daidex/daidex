@@ -2,11 +2,14 @@ import {
   TOGGLE_LOADING,
   CHANGE_VIEW,
   SET_NETWORK,
-  SET_WALLET,
+  UPDATE_BALANCES,
+  UPDATE_ACCOUNT,
   INIT_EXCHANGE,
 } from 'src/store/actions/appActions'
 import appStates from 'src/store/states/appStates'
 import { setToState } from 'src/utils'
+
+import tokensByNetwork from 'src/store/networks.json'
 
 export const initialState = {
   ui: {
@@ -15,9 +18,12 @@ export const initialState = {
     loading: false
   },
   data: {
-    network: {},
+    network: {
+
+    },
     wallet: {
-      loaded: false
+      loaded: false,
+      balances: {}
     }
   }
 }
@@ -25,11 +31,13 @@ export const initialState = {
 const allowedNetworks = {
   1: {
     id: 1,
-    name: 'MainNet'
+    name: 'Mainnet',
+    tokens: tokensByNetwork.Mainnet
   },
   42: {
     id: 42,
-    name: 'Kovan'
+    name: 'Kovan',
+    tokens: tokensByNetwork.Kovan,
   }
 }
 
@@ -56,10 +64,7 @@ export default function appReducer(state = initialState, action = {}) {
       return setToState(state, {
         'ui.view': getViewByNetwork(state.data.network.id),
         'ui.previousView': state.ui.view,
-        'data.wallet': {
-          ...state.data.wallet,
-          address: action.payload.address
-        }
+        'data.wallet.address': action.payload.address,
       })
 
     case SET_NETWORK:
@@ -67,11 +72,16 @@ export default function appReducer(state = initialState, action = {}) {
         'data.network': allowedNetworks[action.payload.networkId] || {}
       })
 
-    case SET_WALLET:
+    case UPDATE_ACCOUNT:
       return setToState(state, {
-        'data.wallet': {
-          ...state.data.wallet,
-          ...action.payload
+        'data.wallet.address': action.payload.address
+      })
+
+    case UPDATE_BALANCES:
+      return setToState(state, {
+        'data.wallet.balances': {
+          ...state.data.wallet.balances,
+          ...action.payload.balances
         }
       })
 
