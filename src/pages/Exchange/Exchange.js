@@ -162,7 +162,7 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
-        {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError /> : this.renderComingSoon()}
+        {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
       </Row>
     )
   }
