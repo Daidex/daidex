@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "precommit": "npm run lint",
-    "start": "webpack-dev-server --mode development --open --progress",
+    "start": "webpack-dev-server --mode development --progress",
     "build:dist": "better-npm-run build:dist",
     "build:prod": "better-npm-run build:prod",
     "lint": "eslint src"

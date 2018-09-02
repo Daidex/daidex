@@ -91,6 +91,10 @@
       0,
       "never"
     ],
+    "jsxa11y/anchor-is-valid": [
+      0,
+      "never"
+    ],
     "react/destructuring-assignment": [
       0,
       "never"
@@ -104,6 +108,10 @@
       "never"
     ],
     "jsx-a11y/no-static-element-interactions": [
+      0,
+      "never"
+    ],
+    "jsx-a11y/anchor-is-valid": [
       0,
       "never"
     ],

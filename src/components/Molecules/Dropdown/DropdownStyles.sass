@@ -1,0 +1,63 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+// Base  
+.dropdown
+  position: relative
+  display: inline-block
+  // background-color: $white-color
+  cursor: pointer
+  outline: 0
+
+// Themes
+.default
+  composes: dropdown
+  +font-style
+  color: $default-color
+  border: $px solid $default-color
+
+.tokens
+  composes: dropdown
+  +font-style
+  font-family: $quicksand
+  font-size: size($h6-font-size)
+  background-color: $white-color
+  padding: size(2, 'em') size(0.5, 'em')
+  border-radius: size(5)
+  margin: 0 size(.5, 'em')
+  .item
+    padding: size(10, 'px') size(15, 'px')
+    &.active
+      color: $green-color
+
+// Element styles
+.selected
+  background-color: inherit
+.open
+  .list
+    max-height: 200px
+    visibility: visible
+
+.list
+  width: 100%
+  background-color: inherit
+  position: absolute
+  left: 0
+  max-height: 0
+  visibility: hidden
+  overflow-y: auto
+  list-style: none
+  padding: 0
+  margin: 0
+
+.item
+  &:hover
+    background-color: transparentize($gray-color, 0.9)
+  &.active
+    color: $primary-color
+  &.disabled
+    opacity: 0.7
+    cursor: not-allowed
+    &:hover
+      background-color: inherit
