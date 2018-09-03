@@ -1,0 +1,17 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.input
+  color: $green-color
+  +font-style
+  outline: none
+  border: none
+
+.default
+  composes: input
+  background-color: $white-color
+  font-size: size($h6-font-size)
+  color: $black-color
+  padding: size(10, 'px') size(15, 'px')
+  border-radius: size(5)

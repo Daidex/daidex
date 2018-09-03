@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { get } from 'lodash'
+import { get, omit } from 'lodash'
 
 import Row from 'src/components/Atoms/Row'
 import Icon from 'src/components/Atoms/Icon'
@@ -115,7 +115,7 @@ class Dropdown extends Component {
         aria-controls="listbox"
         aria-expanded={this.state.open}
         tabIndex="0"
-        {...rest}
+        {...omit(rest, ['initialSelected', 'closeAfterSelected'])}
         // onBlur={this.handleBlur}
       >
         <Row className={styles.selected}>

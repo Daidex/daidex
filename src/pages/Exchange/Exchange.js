@@ -14,6 +14,7 @@ import {
 } from 'src/store/actions/appActions'
 
 import Row from 'src/components/Atoms/Row'
+import Input from 'src/components/Atoms/Input'
 import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
 import Dropdown from 'src/components/Molecules/Dropdown'
@@ -163,6 +164,7 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
+        <Input readOnly value="1.85 WETH" />
         <Dropdown
           theme="tokens"
           label="Choose an option"
