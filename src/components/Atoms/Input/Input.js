@@ -1,42 +1,74 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { get } from 'lodash'
+import { get, omit } from 'lodash'
+import AutosizeInput from 'react-input-autosize'
 import classnames from 'classnames'
 
 import styles from './InputStyles.sass'
 
-const Input = ({
-  theme,
-  type,
-  onChange,
-  label,
-  value,
-  className,
-  ...rest
-}) => {
-  const classNames = classnames({
-    [get(styles, theme, 'default')]: true,
-    [className]: !!className,
-  })
+class Input extends Component {
+  isController = false
 
-  return (
-    <input
-      className={classNames}
-      type={type}
-      onChange={onChange}
-      value={value}
-      {...rest}
-    />
-  )
+  constructor(props) {
+    super(props)
+
+    this.isController = !!this.props.value
+    this.state = {
+      value: ''
+    }
+  }
+
+  onChange = ({ target }) => {
+    if (this.isController) {
+      this.props.onChange(target.value)
+    } else {
+      this.setState({ value: target.value }, () => {
+        this.props.onChange(target.value)
+      })
+    }
+  }
+
+  render() {
+    const {
+      theme,
+      type,
+      label,
+      value,
+      className,
+      autoSize,
+      ...rest
+    } = this.props
+
+    const Component = autoSize ? AutosizeInput : 'input'
+
+    const classNames = classnames({
+      [get(styles, theme, 'default')]: true,
+      [className]: !!className,
+    })
+
+    return (
+      <Component
+        className={classNames}
+        type={type}
+        onChange={this.onChange}
+        value={this.isController ? value : this.state.value}
+        {...omit(rest, ['onChange'])}
+      />
+    )
+  }
 }
 
 Input.propTypes = {
   theme: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   className: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
+  autoSize: PropTypes.bool,
 }
 
 Input.defaultProps = {
@@ -45,7 +77,8 @@ Input.defaultProps = {
   onChange: () => {},
   value: undefined,
   className: '',
-  label: ''
+  label: '',
+  autoSize: false
 }
 
 export default Input
