@@ -1,0 +1,20 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.icon
+  display: inline-block
+
+.default
+  composes: icon
+  +font-style
+  color: $default-color
+
+.big
+  composes: icon
+  font-size: size($h1-font-size)
+
+.token
+  composes: big
+  color: $black-color
+  width: size(30, 'px')
