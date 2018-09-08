@@ -42,7 +42,7 @@ $h5-font-size: 24;
 $h6-font-size: 20;
 
 // Typography maps
-$font-families: (default: 'Arial', monospace: $source_code_pro);
+$font-families: (default: $quicksand, monospace: $source_code_pro);
 $font-sizes: (default: $default-font-size, large: $large-font-size, small: $small-font-size, h1: $h1-font-size, h2: $h2-font-size, h3: $h3-font-size, h4: $h4-font-size, h5: $h5-font-size, h6: $h6-font-size);
 $font-weights: (regular: 400, medium: 500, bold: 700);
 

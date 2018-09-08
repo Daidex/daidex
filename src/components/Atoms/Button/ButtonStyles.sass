@@ -24,7 +24,7 @@
   font-size: size($h6-font-size)
   background-color: $green-color
   border-radius: size(40)
-  padding: size(0.5,'em') size(2.5,'em')
+  padding: size(0.5, 'em') size(2.5, 'em')
   box-shadow: 5px 5px 20px rgba($black-color, 0.5);
   color: $black-color
   transition: all 0.3s ease-in
@@ -32,6 +32,13 @@
 .orange
   composes: base
   background-color: $orange
+
+.outline-black
+  composes: base
+  border-radius: size(5)
+  padding: size(3) size(10)
+  border: $px $black-color solid
+  color: $black-color
 
 .disabled
   composes: base

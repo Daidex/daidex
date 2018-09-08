@@ -17,6 +17,7 @@ import Row from 'src/components/Atoms/Row'
 import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
 import Dropdown from 'src/components/Molecules/Dropdown'
+import TradeForm from 'src/components/Organisms/TradeForm'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
 
 import appStates from 'src/store/states/appStates'
@@ -163,6 +164,7 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
+        <TradeForm />
         <Dropdown
           theme="tokens"
           label="Choose an option"
