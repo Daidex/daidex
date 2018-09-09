@@ -1,14 +1,17 @@
 import React from 'react'
+import { omit } from 'lodash'
 import PropTypes from 'prop-types'
 
 const Row = ({
-  spacing, children, style, ...rest
+  withoutSpacing, spacing, children, style, ...rest
 }) => (
   <div
     style={{
       flex: 1,
-      paddingTop: `${spacing.top}px`,
-      paddingBottom: `${spacing.bottom}px`,
+      ...omit({
+        paddingTop: `${spacing.top}px`,
+        paddingBottom: `${spacing.bottom}px`,
+      }, withoutSpacing ? ['paddingTop', 'paddingBottom'] : []),
       ...style,
     }}
     {...rest}
@@ -22,13 +25,15 @@ Row.defaultProps = {
     top: 5,
     bottom: 5,
   },
-  style: {}
+  style: {},
+  withoutSpacing: false
 }
 
 Row.propTypes = {
   spacing: PropTypes.shape({}),
   children: PropTypes.node.isRequired,
   style: PropTypes.shape({}),
+  withoutSpacing: PropTypes.bool
 }
 
 

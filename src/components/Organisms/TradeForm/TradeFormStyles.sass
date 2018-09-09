@@ -1,0 +1,35 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.container
+  padding: size(20) size(20)
+  border-radius: size(8)
+  background-color: $cobalt-dark
+
+.fields
+  display: flex
+  flex-direction: column
+  margin-top: size(10)
+
+.buyContainer
+  composes: fields
+.soldContainer
+  composes: fields
+
+.iconContainer
+  margin-top: size(10)
+  display: flex
+  justify-content: center
+
+.action
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.textBase
+  color: $green-color
+  font-size: size($large-font-size)
+  line-height: size(2.83)
+  margin: size(30)
+  font-weight: 300
