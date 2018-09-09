@@ -16,7 +16,6 @@ import {
 import Row from 'src/components/Atoms/Row'
 import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
-import Dropdown from 'src/components/Molecules/Dropdown'
 import TradeForm from 'src/components/Organisms/TradeForm'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
 
@@ -165,20 +164,6 @@ class Exchange extends Component {
       <Row>
         <Header />
         <TradeForm />
-        <Dropdown
-          theme="tokens"
-          label="Choose an option"
-          source={[
-            {
-              value: 'ETH',
-              label: 'ETH',
-            },
-            {
-              value: 'WETH',
-              label: 'WETH'
-            }
-          ]}
-        />
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
       </Row>
     )
