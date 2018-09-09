@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import HomePage from 'src/pages/Home'
 import ExchangePage from 'src/pages/Exchange'
+import HowToStartPage from 'src/pages/HowToStart'
 
 export default [
   {
@@ -13,6 +14,11 @@ export default [
     path: '/exchange',
     exact: true,
     component: ExchangePage,
+  },
+  {
+    path: '/how-to-start',
+    exact: true,
+    component: HowToStartPage,
   }
 ]
 
