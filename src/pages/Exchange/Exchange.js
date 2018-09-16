@@ -155,6 +155,14 @@ class Exchange extends Component {
     this.props.changeView(this.props.previousView)
   }
 
+  openWrapModal = (isWrap = true) => {
+    this.props.changeView(
+      isWrap
+        ? appStates.view.exchangeWrap
+        : appStates.view.exchangeUnWrap
+    )
+  }
+
   renderComingSoon = () => (
     <Row style={{ margin: 20 }}>
       <Text theme="h1">Comming Soon</Text>
@@ -174,12 +182,20 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
-        <TradeTable />
+        <TradeTable
+          openWrapModal={this.openWrapModal}
+        />
         <Modal
-          isVisible={view === appStates.view.exchangeWrap}
+          isVisible={(
+            view === appStates.view.exchangeWrap
+            || view === appStates.view.exchangeUnWrap
+          )}
           onCloseModal={this.closeWrapModal}
         >
-          <WrapForm onSubmit={this.showResults} wrap={false} />
+          <WrapForm
+            onSubmit={this.showResults}
+            wrap={view === appStates.view.exchangeWrap}
+          />
         </Modal>
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
       </Row>

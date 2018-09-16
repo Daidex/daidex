@@ -33,6 +33,7 @@ const defaultData = [
 
 class TradeTable extends Component {
   static propTypes = {
+    openWrapModal: PropTypes.func.isRequired,
     headers: PropTypes.array,
     data: PropTypes.arrayOf(PropTypes.shape({
       symbol: PropTypes.string,
@@ -50,9 +51,10 @@ class TradeTable extends Component {
 
   componentDidMount() {}
 
-  handleAfterClick = (ev) => {
+  handleAfterClick = (ev, idx) => {
     if (ev.nativeEvent.offsetX > ev.target.offsetWidth) {
-      console.log('wrap/unwrap button')
+      const isWrap = idx === 0
+      this.props.openWrapModal(isWrap)
     }
   }
 
@@ -109,7 +111,7 @@ class TradeTable extends Component {
                     <span
                       onClick={index > 2
                         ? () => null
-                        : ev => this.handleAfterClick(ev, item)
+                        : ev => this.handleAfterClick(ev, index)
                       }
                     >
                       {item.name}
