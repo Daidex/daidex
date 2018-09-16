@@ -6,6 +6,7 @@ export default {
     metaMaskFailToConnect: 'metaMaskFailToConnect',
     exchange: 'exchange',
     exchangeWithError: 'exchangeWithError',
-    exchangeWrap: 'exchangeWrap'
+    exchangeWrap: 'exchangeWrap',
+    exchangeUnWrap: 'exchangeUnWrap'
   }
 };

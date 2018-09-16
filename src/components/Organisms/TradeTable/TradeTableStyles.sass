@@ -1,0 +1,72 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.container
+  border-collapse: separate
+  padding: size(10)
+  border-radius: size(8)
+  background-color: transparentize($cobalt-dark, 0.4)
+  th, td
+    padding: size(14) size(30)
+  th
+    padding-top: size(18)
+    padding-bottom: size(18)
+    color: $white-color
+    text-align: right
+  td
+    color: $blue-color
+    text-align: right
+    font-weight: 400
+    &:first-child
+      text-transform: uppercase
+      font-weight: bolder
+    &:nth-child(3)
+      text-align: center
+
+  tr
+    th:nth-child(3),
+    td:nth-child(3)
+      padding-left: size(60)
+
+.body
+  tr
+    border-radius: size(8)
+    &:nth-child(odd) td
+      background-color: transparentize($blue-dark, 0.4)
+      &:first-child
+        border-top-left-radius: size(5)
+        border-bottom-left-radius: size(5)
+      &:last-child
+        border-top-right-radius: size(5)
+        border-bottom-right-radius: size(5)
+
+  tr:nth-child(2),
+  tr:nth-child(3)
+    td:nth-child(2)
+      user-select: none
+      span
+        display: inline-block
+        width: 100%
+        position: relative
+        z-index: 1
+        &:after
+          content: ''
+          cursor: pointer
+          font-size: size($medium-font-size)
+          display: inline
+          top: 5
+          position: absolute
+          padding: size(3) size(5)
+          border-radius: size(5)
+          color: $white-color
+          background-color: $gray-color
+          margin-left: size(10)
+
+  tr:nth-child(2) td:nth-child(2) span:after
+    content: 'Wrap'
+  tr:nth-child(3) td:nth-child(2) span:after
+    content: 'Unwrap'
+
+.collapse
+  visibility: collapse
