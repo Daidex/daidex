@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 import Row from 'src/components/Atoms/Row'
+import Switch from 'src/components/Atoms/Switch'
 import styles from './TradeTableStyles.sass'
 
 const defaultHeaders = ['Simbolo', 'Nombre', 'Estado', 'Balance', 'Valor (MXN)']
@@ -74,7 +75,13 @@ class TradeTable extends Component {
                     <span>{item.name}</span>
                   </td>
                   <td>
-                    <span>True</span>
+                    <span>
+                      <Switch
+                        // isController
+                        checked={item.enabled}
+                        onChange={checked => console.log('allowed', checked)}
+                      />
+                    </span>
                   </td>
                   <td>
                     <span>{item.balance}</span>
@@ -109,7 +116,13 @@ class TradeTable extends Component {
                     </span>
                   </td>
                   <td>
-                    <span>True</span>
+                    <span>
+                      <Switch
+                        // isController
+                        checked={item.enabled}
+                        onChange={checked => console.log('allowed', checked)}
+                      />
+                    </span>
                   </td>
                   <td>
                     <span>{item.balance}</span>
