@@ -18,6 +18,8 @@ import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
 import TradeTable from 'src/components/Organisms/TradeTable'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
+import Modal from 'src/components/Molecules/Modal'
+import WrapForm from 'src/components/Organisms/WrapForm'
 
 import appStates from 'src/store/states/appStates'
 import { isMetaMask } from 'src/utils'
@@ -40,6 +42,7 @@ class Exchange extends Component {
       name: PropTypes.string,
     }).isRequired,
     view: PropTypes.string.isRequired,
+    previousView: PropTypes.string.isRequired,
     changeView: PropTypes.func.isRequired,
     setNetwork: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
@@ -136,12 +139,20 @@ class Exchange extends Component {
     }, 1000)
   }
 
+  showResults = values => (
+    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+  )
+
   shouldShowMetaMaskError = (view) => {
     return (
       view === appStates.view.metaMaskFailToConnect
       || view === appStates.view.metaMaskIsRequired
       || view === appStates.view.metaMaskIsNotMainNet
     )
+  }
+
+  closeWrapModal = () => {
+    this.props.changeView(this.props.previousView)
   }
 
   renderComingSoon = () => (
@@ -164,6 +175,12 @@ class Exchange extends Component {
       <Row>
         <Header />
         <TradeTable />
+        <Modal
+          isVisible={view === appStates.view.exchangeWrap}
+          onCloseModal={this.closeWrapModal}
+        >
+          <WrapForm onSubmit={this.showResults} wrap={false} />
+        </Modal>
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
       </Row>
     )

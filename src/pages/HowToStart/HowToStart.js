@@ -6,8 +6,12 @@ import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
 import Button from 'src/components/Atoms/Button'
 
-// import logo from 'assets/img/daidex-logo.png'
-// import desktop from 'assets/img/desktop.png'
+// images
+import number1 from 'assets/img/n1.png'
+import number2 from 'assets/img/n2.png'
+import number3 from 'assets/img/n3.png'
+
+import copies from './copies.json'
 
 import styles from './HowToStartStyles.sass'
 
@@ -16,7 +20,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Row>
+      <Row className={styles.scroll}>
         <Header spacing={{ top: 0 }} />
         <Row className={styles.container}>
           <Col className={styles.content} spacing={{ left: 200 }}>
@@ -26,17 +30,23 @@ class Home extends Component {
               </Text>
             </Row>
             <Row spacing={{ top: 10, bottom: 10 }}>
-
-              <Text theme="h2" className={styles.title}>
-                Conecta tu Wallet
-              </Text>
+              <Row style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={number1}
+                  width={70}
+                  alt="number 1"
+                  style={{
+                    marginLeft: '-100px',
+                    marginRight: '30px'
+                  }}
+                />
+                <Text theme="h2" className={styles.title}>
+                  Conecta tu Wallet
+                </Text>
+              </Row>
               <Row spacing={{ top: 10, bottom: 10 }}>
                 <Text className={styles.description}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum.
+                  {copies.step_1}
                 </Text>
                 <Col spacing={{ left: 25, right: 25 }}>
                   <Text className={styles.helpText}>
@@ -47,16 +57,23 @@ class Home extends Component {
               </Row>
             </Row>
             <Row spacing={{ top: 10, bottom: 10 }}>
-              <Text theme="h2" className={styles.title}>
-                Wrappea Ether
-              </Text>
+              <Row style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={number2}
+                  width={70}
+                  alt="number 2"
+                  style={{
+                    marginLeft: '-100px',
+                    marginRight: '30px'
+                  }}
+                />
+                <Text theme="h2" className={styles.title}>
+                  Wrappea Ether
+                </Text>
+              </Row>
               <Row spacing={{ top: 10, bottom: 10 }}>
                 <Text className={styles.description}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum.
+                  {copies.step_2}
                 </Text>
                 <Col spacing={{ left: 25, right: 25 }}>
                   <Text className={styles.helpText}>
@@ -67,16 +84,23 @@ class Home extends Component {
               </Row>
             </Row>
             <Row spacing={{ top: 10, bottom: 10 }}>
-              <Text theme="h2" className={styles.title}>
-                Desbloquea tus Tokens
-              </Text>
+              <Row style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={number3}
+                  width={70}
+                  alt="number 3"
+                  style={{
+                    marginLeft: '-100px',
+                    marginRight: '30px'
+                  }}
+                />
+                <Text theme="h2" className={styles.title}>
+                  Desbloquea tus Tokens
+                </Text>
+              </Row>
               <Row spacing={{ top: 10, bottom: 10 }}>
                 <Text className={styles.description}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum.
+                  {copies.step_3}
                 </Text>
                 <Col spacing={{ left: 25, right: 25 }}>
                   <Text className={styles.helpText}>
