@@ -34,6 +34,7 @@ $source_code_pro: 'Source Code Pro';
 // Font sizes
 $default-font-size: 16;
 $large-font-size: 18;
+$medium-font-size: 12.5;
 $small-font-size: 9;
 
 // Heading sizes
@@ -71,6 +72,7 @@ $px: .0625rem;
 
 body {
   font-family: $quicksand;
+  background-color: #1E1B32;
 }
 
 img:not([alt]) {

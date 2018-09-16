@@ -95,6 +95,10 @@
       0,
       "never"
     ],
+    "jsx-a11y/click-events-have-key-events": [
+      0,
+      "never"
+    ],
     "react/destructuring-assignment": [
       0,
       "never"

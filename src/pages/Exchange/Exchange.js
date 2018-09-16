@@ -16,7 +16,7 @@ import {
 import Row from 'src/components/Atoms/Row'
 import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
-import TradeForm from 'src/components/Organisms/TradeForm'
+import TradeTable from 'src/components/Organisms/TradeTable'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
 
 import appStates from 'src/store/states/appStates'
@@ -163,7 +163,7 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
-        <TradeForm />
+        <TradeTable />
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
       </Row>
     )
