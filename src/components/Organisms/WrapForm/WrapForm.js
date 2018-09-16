@@ -9,30 +9,35 @@ import Row from 'src/components/Atoms/Row'
 import InputRedux from 'src/components/Molecules/InputRedux'
 
 import styles from './WrapForm.sass'
+import copies from './copies.json'
 
-const WrapForm = (props) => {
-  // const { handleSubmit, pristine, reset, submitting } = props;
-  const { handleSubmit, pristine, submitting } = props
+const WrapForm = ({
+  handleSubmit,
+  pristine,
+  submitting,
+  wrap,
+}) => {
+  const texts = wrap ? copies.wrap : copies.unwrap
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <Text theme="h1" style={{ textAlign: 'center' }}>Wrap ETH</Text>
+      <Text theme="h1" style={{ textAlign: 'center' }}>
+        { texts.title }
+      </Text>
       <Row>
         <Text className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Suspendisse a sapien varius, facilisis massa non, commodo purus.
-          Morbi vel nisl sed enim ullamcorper feugiat eu nec justo.
+          { texts.description }
         </Text>
       </Row>
       <Row className={styles.balance}>
         <Text>Balance</Text>
-        <Text>0.00003234 <span>ETH</span></Text>
+        <Text>0.00003234 <span>{ texts.symbol }</span></Text>
       </Row>
       <Row>
         <Field
           name="coin"
           component={InputRedux}
           type="number"
-          placeholder="ETH"
+          placeholder={texts.symbol}
           className={styles.input}
         />
       </Row>
@@ -42,7 +47,7 @@ const WrapForm = (props) => {
           disabled={pristine || submitting}
           className={styles.button}
         >
-          Convert to WETH
+          Convert to { texts.antonym }
         </Button>
       </Row>
     </form>
@@ -53,12 +58,14 @@ WrapForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
+  wrap: PropTypes.bool,
   // reset: PropTypes.func
 }
 
 WrapForm.defaultProps = {
   pristine: false,
   submitting: false,
+  wrap: true,
   // reset: () => {}
 }
 
