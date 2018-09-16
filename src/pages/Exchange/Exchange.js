@@ -99,9 +99,18 @@ class Exchange extends Component {
   }
 
   init = (address) => {
+    const {
+      network: { tokens },
+    } = this.props
+
     this.props.initExchange(address)
     this.getBalance(address)
-    this.getBalance(address, 'WETH')
+
+
+    Object.keys(tokens)
+      .forEach((token) => {
+        this.getBalance(address, token)
+      })
   }
 
   validateMetaMask = () => {
