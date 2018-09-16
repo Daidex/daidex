@@ -8,6 +8,7 @@ import {
 import { createBrowserHistory } from 'history'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import thunk from 'redux-thunk'
+import { reducer as reduxFormReducer } from 'redux-form'
 
 import appReducer from 'src/store/reducers/appReducer'
 
@@ -28,6 +29,7 @@ const enhancer = composeEnhancers(
 
 const rootReducer = combineReducers({
   app: appReducer,
+  form: reduxFormReducer
 })
 
 export default createStore(

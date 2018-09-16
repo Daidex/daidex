@@ -19,6 +19,7 @@ import Header from 'src/components/Organisms/Header'
 import TradeForm from 'src/components/Organisms/TradeForm'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
 import Modal from 'src/components/Molecules/Modal'
+import WrapForm from 'src/components/Organisms/WrapForm'
 
 import appStates from 'src/store/states/appStates'
 import { isMetaMask } from 'src/utils'
@@ -137,6 +138,10 @@ class Exchange extends Component {
     }, 1000)
   }
 
+  showResults = values => (
+    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+  )
+
   shouldShowMetaMaskError = (view) => {
     return (
       view === appStates.view.metaMaskFailToConnect
@@ -165,7 +170,7 @@ class Exchange extends Component {
       <Row>
         <Header />
         <Modal>
-          <Text>Donna Missal</Text>
+          <WrapForm onSubmit={this.showResults} />
         </Modal>
         <TradeForm />
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
