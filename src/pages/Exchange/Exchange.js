@@ -42,6 +42,7 @@ class Exchange extends Component {
       name: PropTypes.string,
     }).isRequired,
     view: PropTypes.string.isRequired,
+    previousView: PropTypes.string.isRequired,
     changeView: PropTypes.func.isRequired,
     setNetwork: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
@@ -150,6 +151,10 @@ class Exchange extends Component {
     )
   }
 
+  closeWrapModal = () => {
+    this.props.changeView(this.props.previousView)
+  }
+
   renderComingSoon = () => (
     <Row style={{ margin: 20 }}>
       <Text theme="h1">Comming Soon</Text>
@@ -169,7 +174,10 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
-        <Modal>
+        <Modal
+          isVisible={view === appStates.view.exchangeWrap}
+          onCloseModal={this.closeWrapModal}
+        >
           <WrapForm onSubmit={this.showResults} />
         </Modal>
         <TradeForm />

@@ -17,48 +17,30 @@ const customStyles = {
 
 ReactModal.setAppElement('#root')
 
-class Modal extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  }
+const Modal = ({
+  children,
+  isVisible,
+  onCloseModal,
+}) => {
+  return (
+    <ReactModal
+      isOpen={isVisible}
+      // onAfterOpen={this.afterOpenModal}
+      onRequestClose={onCloseModal}
+      style={customStyles}
+      className={styles.modal}
+      overlayClassName={styles.overlay}
+      contentLabel="Example Modal"
+    >
+      {children}
+    </ReactModal>
+  );
+}
 
-  constructor() {
-    super();
-
-    this.state = {
-      modalIsOpen: true
-    };
-
-    this.openModal = this.openModal.bind(this);
-    // this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  // afterOpenModal() {}
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  render() {
-    return (
-      <ReactModal
-        isOpen={this.state.modalIsOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
-        style={customStyles}
-        className={styles.modal}
-        overlayClassName={styles.overlay}
-        contentLabel="Example Modal"
-      >
-        {this.props.children}
-      </ReactModal>
-    );
-  }
+Modal.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  onCloseModal: PropTypes.func.isRequired,
 }
 
 export default Modal
