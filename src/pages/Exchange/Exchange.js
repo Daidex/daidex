@@ -178,7 +178,7 @@ class Exchange extends Component {
           isVisible={view === appStates.view.exchangeWrap}
           onCloseModal={this.closeWrapModal}
         >
-          <WrapForm onSubmit={this.showResults} />
+          <WrapForm onSubmit={this.showResults} wrap={false} />
         </Modal>
         <TradeForm />
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
