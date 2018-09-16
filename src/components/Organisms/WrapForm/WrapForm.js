@@ -6,37 +6,9 @@ import PropTypes from 'prop-types'
 import Text from 'src/components/Atoms/Text'
 import Button from 'src/components/Atoms/Button'
 import Row from 'src/components/Atoms/Row'
-// import Col from 'src/components/Atoms/Col'
-import Input from 'src/components/Atoms/Input'
+import InputRedux from 'src/components/Molecules/InputRedux'
 
 import styles from './WrapForm.sass'
-
-
-const MyCustomInput = (props) => {
-  return (
-    <Row style={{ display: 'flex' }}>
-      <Input
-        name="coin"
-        type="number"
-        placeholder="ETH"
-        style={{ ...props.style }}
-        className={props.className}
-        onChange={props.input.onChange}
-      />
-    </Row>
-  )
-}
-
-MyCustomInput.propTypes = {
-  input: PropTypes.object.isRequired,
-  style: PropTypes.object,
-  className: PropTypes.string
-}
-
-MyCustomInput.defaultProps = {
-  style: {},
-  className: ''
-}
 
 const WrapForm = (props) => {
   // const { handleSubmit, pristine, reset, submitting } = props;
@@ -58,7 +30,7 @@ const WrapForm = (props) => {
       <Row>
         <Field
           name="coin"
-          component={MyCustomInput}
+          component={InputRedux}
           type="number"
           placeholder="ETH"
           className={styles.input}
