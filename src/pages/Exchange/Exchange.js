@@ -18,6 +18,7 @@ import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
 import TradeForm from 'src/components/Organisms/TradeForm'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
+import Modal from 'src/components/Molecules/Modal'
 
 import appStates from 'src/store/states/appStates'
 import { isMetaMask } from 'src/utils'
@@ -163,6 +164,9 @@ class Exchange extends Component {
     return (
       <Row>
         <Header />
+        <Modal>
+          <Text>Donna Missal</Text>
+        </Modal>
         <TradeForm />
         {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
       </Row>
