@@ -16,6 +16,7 @@ const WrapForm = ({
   pristine,
   submitting,
   wrap,
+  balances,
 }) => {
   const texts = wrap ? copies.wrap : copies.unwrap
   return (
@@ -30,7 +31,7 @@ const WrapForm = ({
       </Row>
       <Row className={styles.balance}>
         <Text>Balance</Text>
-        <Text>0.00003234 <span>{ texts.symbol }</span></Text>
+        <Text>{ wrap ? balances.ETH : balances.WETH } <span>{ texts.symbol }</span></Text>
       </Row>
       <Row>
         <Field
@@ -59,6 +60,7 @@ WrapForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   wrap: PropTypes.bool,
+  balances: PropTypes.object.isRequired,
   // reset: PropTypes.func
 }
 
