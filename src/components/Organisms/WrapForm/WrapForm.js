@@ -19,6 +19,7 @@ const WrapForm = ({
   balances,
 }) => {
   const texts = wrap ? copies.wrap : copies.unwrap
+  const balance = wrap ? balances.ETH : balances.WETH
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
       <Text theme="h1" style={{ textAlign: 'center' }}>
@@ -31,15 +32,19 @@ const WrapForm = ({
       </Row>
       <Row className={styles.balance}>
         <Text>Balance</Text>
-        <Text>{ wrap ? balances.ETH : balances.WETH } <span>{ texts.symbol }</span></Text>
+        <Text>{ balance } <span>{ texts.symbol }</span></Text>
       </Row>
       <Row>
+        {
+          balance > 0 ? null : <Text className={styles.warning}>Lorem Ipsum dolor sit amet</Text>
+        }
         <Field
           name="coin"
           component={InputRedux}
           type="number"
           placeholder={texts.symbol}
           className={styles.input}
+          disabled={balance <= 0}
         />
       </Row>
       <Row style={{ display: 'flex' }}>

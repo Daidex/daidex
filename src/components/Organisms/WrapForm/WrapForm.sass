@@ -26,3 +26,20 @@
   font-weight: bold
   width: 100%
   margin: 0
+
+.warning
+  color: #F8A602
+  font-size: 14px
+  margin: 0
+  &::before
+    content: "!"
+    display: inline-block
+    width: 0
+    height: 0
+    border-left: 10px solid transparent
+    border-right: 10px solid transparent
+    border-bottom: 15px solid #F8A602
+    border-radius: 3px
+    color: white
+    font-weight: bold
+    margin: 0 5px
