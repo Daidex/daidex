@@ -9,18 +9,18 @@ import styles from './TradeTableStyles.sass'
 const defaultHeaders = ['Simbolo', 'Nombre', 'Estado', 'Balance', 'Valor (MXN)']
 const defaultData = [
   {
-    symbol: 'WETH',
-    name: 'Wrapper ETH',
-    enabled: true,
-    balance: 0.0000123,
-    value: 500.00
-  },
-  {
     symbol: 'ETH',
     name: 'Ethereum',
     enabled: true,
     balance: 0.0000132,
     value: 1000.00
+  },
+  {
+    symbol: 'WETH',
+    name: 'Wrapper ETH',
+    enabled: true,
+    balance: 0.0000123,
+    value: 500.00
   },
   {
     symbol: 'DAI',
@@ -61,8 +61,8 @@ class TradeTable extends Component {
   render() {
     const { headers, data } = this.props
     return (
-      <Row>
-        <Row>
+      <Row withoutSpacing style={{ margin: '0 20px' }}>
+        <Row spacing={{ top: 0, bottom: 5 }}>
           <table className={classnames(styles.container, styles.spacing)}>
             <tbody>
               <tr>

@@ -14,15 +14,17 @@ import {
 } from 'src/store/actions/appActions'
 
 import Row from 'src/components/Atoms/Row'
-import Text from 'src/components/Atoms/Text'
 import Header from 'src/components/Organisms/Header'
 import TradeTable from 'src/components/Organisms/TradeTable'
+import TradeForm from 'src/components/Organisms/TradeForm'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
 import Modal from 'src/components/Molecules/Modal'
 import WrapForm from 'src/components/Organisms/WrapForm'
 
 import appStates from 'src/store/states/appStates'
 import { isMetaMask } from 'src/utils'
+
+import styles from './ExchangeStyles.sass'
 
 const TOKEN_DECIMALS = 18
 const DECIMALS_TO_SHOW = 9
@@ -172,28 +174,12 @@ class Exchange extends Component {
     )
   }
 
-  renderComingSoon = () => (
-    <Row style={{ margin: 20 }}>
-      <Text theme="h1">Comming Soon</Text>
-      <Text theme="light-text">Network: {this.props.network.name}</Text>
-      <Text theme="light-text">Address: {this.props.wallet.address}</Text>
-      <Row>
-        <Text theme="title">Balances</Text>
-        <Text theme="light-text">ETH: {this.props.wallet.balances.ETH}</Text>
-        <Text theme="light-text">WETH: {this.props.wallet.balances.WETH}</Text>
-      </Row>
-    </Row>
-  )
-
   render() {
     const { view } = this.props
 
     return (
       <Row>
         <Header />
-        <TradeTable
-          openWrapModal={this.openWrapModal}
-        />
         <Modal
           isVisible={(
             view === appStates.view.exchangeWrap
@@ -206,7 +192,16 @@ class Exchange extends Component {
             wrap={view === appStates.view.exchangeWrap}
           />
         </Modal>
-        {this.shouldShowMetaMaskError(view) ? <MetaMaskWithError view={view} /> : this.renderComingSoon()}
+        {!this.shouldShowMetaMaskError(view)
+          ? (
+            <Row className={styles.content}>
+              <TradeTable
+                openWrapModal={this.openWrapModal}
+              />
+              <TradeForm className={styles.form} />
+            </Row>
+          ) : <MetaMaskWithError view={view} />
+        }
       </Row>
     )
   }
