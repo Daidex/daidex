@@ -5,16 +5,25 @@ import PropTypes from 'prop-types'
 import Row from 'src/components/Atoms/Row'
 import Input from 'src/components/Atoms/Input'
 
-const InputRedux = (props) => {
+const InputRedux = ({
+  name,
+  type,
+  placeholder,
+  style,
+  className,
+  input,
+  disabled,
+}) => {
   return (
     <Row style={{ display: 'flex' }}>
       <Input
-        name={props.name}
-        type={props.type}
-        placeholder={props.placeholder}
-        style={{ ...props.style }}
-        className={props.className}
-        onChange={props.input.onChange}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        style={{ ...style }}
+        className={className}
+        onChange={input.onChange}
+        disabled={disabled}
       />
     </Row>
   )
@@ -26,7 +35,8 @@ InputRedux.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
 }
 
 InputRedux.defaultProps = {
@@ -34,7 +44,8 @@ InputRedux.defaultProps = {
   className: '',
   name: '',
   type: 'text',
-  placeholder: ''
+  placeholder: '',
+  disabled: false,
 }
 
 export default InputRedux
