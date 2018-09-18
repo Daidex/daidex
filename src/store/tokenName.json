@@ -1,0 +1,15 @@
+{
+  "ETH": "Ether",
+  "WETH": "Wrapper Ether",
+  "BAT": "Basic Attetion Token",
+  "DAI": "DAI",
+  "REQ": "Request Network",
+  "ZRX": "0x",
+  "REP": "Augur",
+  "MANA": "Decentraland",
+  "OMG": "OmiseGo",
+  "AION": "Aion",
+  "STORM": "Strom",
+  "ZIL": "Zilliqa",
+  "GNT": "Golem"
+}

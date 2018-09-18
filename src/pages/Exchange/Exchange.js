@@ -36,8 +36,8 @@ class Exchange extends Component {
     wallet: PropTypes.shape({
       address: PropTypes.string,
       balances: PropTypes.shape({
-        ETH: PropTypes.string,
-        WETH: PropTypes.string,
+        ETH: PropTypes.object,
+        WETH: PropTypes.object,
       })
     }).isRequired,
     network: PropTypes.shape({
