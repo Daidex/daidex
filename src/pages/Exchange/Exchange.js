@@ -176,7 +176,6 @@ class Exchange extends Component {
 
   render() {
     const { view } = this.props
-
     return (
       <Row>
         <Header />
@@ -190,6 +189,7 @@ class Exchange extends Component {
           <WrapForm
             onSubmit={this.showResults}
             wrap={view === appStates.view.exchangeWrap}
+            balances={this.props.wallet.balances}
           />
         </Modal>
         {!this.shouldShowMetaMaskError(view)

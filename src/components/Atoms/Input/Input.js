@@ -36,6 +36,7 @@ class Input extends Component {
       value,
       className,
       autoSize,
+      disabled,
       ...rest
     } = this.props
 
@@ -51,6 +52,7 @@ class Input extends Component {
         className={classNames}
         type={type}
         onChange={this.onChange}
+        disabled={disabled}
         value={this.isController ? value : this.state.value}
         {...omit(rest, ['onChange'])}
       />
@@ -69,6 +71,7 @@ Input.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
   autoSize: PropTypes.bool,
+  disabled: PropTypes.bool,
 }
 
 Input.defaultProps = {
@@ -78,7 +81,8 @@ Input.defaultProps = {
   value: undefined,
   className: '',
   label: '',
-  autoSize: false
+  autoSize: false,
+  disabled: false,
 }
 
 export default Input
