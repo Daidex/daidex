@@ -53,9 +53,9 @@ class TradeTable extends Component {
 
   componentDidMount() {}
 
-  handleAfterClick = (ev, idx) => {
+  handleAfterClick = (ev, symbol) => {
     if (ev.nativeEvent.offsetX > ev.target.offsetWidth) {
-      const isWrap = idx === 0
+      const isWrap = symbol === 'ETH'
       this.props.openWrapModal(isWrap)
     }
   }
@@ -113,7 +113,7 @@ class TradeTable extends Component {
                     <span
                       onClick={index > 2
                         ? () => null
-                        : ev => this.handleAfterClick(ev, index)
+                        : ev => this.handleAfterClick(ev, item.symbol)
                       }
                     >
                       {item.name}
