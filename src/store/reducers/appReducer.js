@@ -6,10 +6,12 @@ import {
   UPDATE_ACCOUNT,
   INIT_EXCHANGE,
 } from 'src/store/actions/appActions'
+import { reduce } from 'lodash'
 import appStates from 'src/store/states/appStates'
 import { setToState } from 'src/utils'
 
 import tokensByNetwork from 'src/store/networks.json'
+import tokenName from 'src/store/tokenName.json'
 
 export const initialState = {
   ui: {
@@ -81,7 +83,18 @@ export default function appReducer(state = initialState, action = {}) {
       return setToState(state, {
         'data.wallet.balances': {
           ...state.data.wallet.balances,
-          ...action.payload.balances
+          ...reduce(action.payload.balances, (result, value, key) => {
+            return {
+              ...result,
+              [key]: {
+                symbol: key,
+                balance: value,
+                name: tokenName[key] || 'Unknown',
+                enabled: 'loading',
+                value: 0
+              }
+            }
+          }, {})
         }
       })
 

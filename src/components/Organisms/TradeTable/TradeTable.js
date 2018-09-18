@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
+import { map } from 'lodash'
 
 import Row from 'src/components/Atoms/Row'
 import Switch from 'src/components/Atoms/Switch'
@@ -9,18 +11,18 @@ import styles from './TradeTableStyles.sass'
 const defaultHeaders = ['Simbolo', 'Nombre', 'Estado', 'Balance', 'Valor (MXN)']
 const defaultData = [
   {
-    symbol: 'WETH',
-    name: 'Wrapper ETH',
-    enabled: true,
-    balance: 0.0000123,
-    value: 500.00
-  },
-  {
     symbol: 'ETH',
     name: 'Ethereum',
     enabled: true,
     balance: 0.0000132,
     value: 1000.00
+  },
+  {
+    symbol: 'WETH',
+    name: 'Wrapper ETH',
+    enabled: true,
+    balance: 0.0000123,
+    value: 500.00
   },
   {
     symbol: 'DAI',
@@ -51,9 +53,9 @@ class TradeTable extends Component {
 
   componentDidMount() {}
 
-  handleAfterClick = (ev, idx) => {
+  handleAfterClick = (ev, symbol) => {
     if (ev.nativeEvent.offsetX > ev.target.offsetWidth) {
-      const isWrap = idx === 0
+      const isWrap = symbol === 'ETH'
       this.props.openWrapModal(isWrap)
     }
   }
@@ -61,14 +63,14 @@ class TradeTable extends Component {
   render() {
     const { headers, data } = this.props
     return (
-      <Row>
-        <Row>
+      <Row withoutSpacing style={{ margin: '0 20px' }}>
+        <Row spacing={{ top: 0, bottom: 5 }}>
           <table className={classnames(styles.container, styles.spacing)}>
             <tbody>
               <tr>
-                {headers.map(title => <th key={title}>{title}</th>)}
+                {map(headers, title => <th key={title}>{title}</th>)}
               </tr>
-              {data.map(item => (
+              {map(data, item => (
                 <tr key={item.symbol} className={styles.collapse}>
                   <td>
                     <span>{item.symbol}</span>
@@ -100,10 +102,10 @@ class TradeTable extends Component {
           <table className={classnames(styles.container, styles.body)}>
             <tbody>
               <tr className={styles.collapse}>
-                {headers.map(title => <th key={title}>{title}</th>)}
+                {map(headers, title => <th key={title}>{title}</th>)}
               </tr>
-              {data.map((item, index) => (
-                <tr key={item.symbol}>
+              {map(data, (item, index) => (
+                <tr key={item.symbol} data-token={item.symbol}>
                   <td>
                     <span>{item.symbol}</span>
                   </td>
@@ -111,7 +113,7 @@ class TradeTable extends Component {
                     <span
                       onClick={index > 2
                         ? () => null
-                        : ev => this.handleAfterClick(ev, index)
+                        : ev => this.handleAfterClick(ev, item.symbol)
                       }
                     >
                       {item.name}
@@ -142,4 +144,8 @@ class TradeTable extends Component {
   }
 }
 
-export default TradeTable
+const mapStateToProps = state => ({
+  data: state.app.data.wallet.balances
+})
+
+export default connect(mapStateToProps, {})(TradeTable)

@@ -70,6 +70,10 @@ $columns: 12;
 // Custom
 $px: .0625rem;
 
+* {
+  box-sizing: border-box
+}
+
 body {
   font-family: $quicksand;
   background-color: #1E1B32;

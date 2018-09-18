@@ -46,7 +46,11 @@ class TradeForm extends Component {
     })
 
     return (
-      <Row className={classNames} withoutSpacing>
+      <Col
+        className={classNames}
+        withoutSpacing
+        style={{ marginRight: '20px' }}
+      >
         <Text component="h3" theme="form-title">{copies.form_title}</Text>
         <Row className={styles.soldContainer}>
           <Col>
@@ -115,7 +119,7 @@ class TradeForm extends Component {
             <Button theme="secondary" onClick={() => console.log('Trade')}>{copies.cta_label}</Button>
           </Col>
         </Row>
-      </Row>
+      </Col>
     )
   }
 }

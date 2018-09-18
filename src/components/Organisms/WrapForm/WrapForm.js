@@ -1,4 +1,5 @@
 import React from 'react'
+import { get } from 'lodash'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
@@ -20,7 +21,10 @@ const WrapForm = ({
   balances,
 }) => {
   const texts = wrap ? copies.wrap : copies.unwrap
-  const balance = wrap ? balances.ETH : balances.WETH
+  const balance = wrap
+    ? get(balances, 'ETH.balance', 0)
+    : get(balances, 'WETH.balance', 0)
+
   return (
     <Row>
       <Loader size="75" />

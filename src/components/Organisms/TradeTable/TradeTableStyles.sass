@@ -3,6 +3,7 @@
 @import 'src/styles/resources'
 
 .container
+  width: 100%
   border-collapse: separate
   padding: size(10)
   border-radius: size(8)
@@ -41,8 +42,8 @@
         border-top-right-radius: size(5)
         border-bottom-right-radius: size(5)
 
-  tr:nth-child(2),
-  tr:nth-child(3)
+  tr[data-token="ETH"],
+  tr[data-token="WETH"]
     td:nth-child(2)
       user-select: none
       span
@@ -63,9 +64,9 @@
           background-color: $gray-color
           margin-left: size(10)
 
-  tr:nth-child(2) td:nth-child(2) span:after
+  tr[data-token="ETH"] td:nth-child(2) span:after
     content: 'Wrap'
-  tr:nth-child(3) td:nth-child(2) span:after
+  tr[data-token="WETH"] td:nth-child(2) span:after
     content: 'Unwrap'
 
 .collapse

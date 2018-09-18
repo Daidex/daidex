@@ -1,7 +1,7 @@
 {
   "Mainnet": {
-    "ZRX": "0xe41d2489571d322189246dafa5ebde1f4699f498",
     "WETH": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "ZRX": "0xe41d2489571d322189246dafa5ebde1f4699f498",
     "DAI": "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
     "DGD": "0xe0b7927c4af23765cb51314a0e0521a9645f0e2a",
     "MKR": "0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2",
@@ -15,8 +15,8 @@
     "AION": "0x4ceda7906a5ed2179785cd3a40a69ee8bc99c466"
   },
   "Kovan": {
-    "ZRX": "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570",
     "WETH": "0xd0a1e359811322d97991e03f863a0c30c2cf029c",
+    "ZRX": "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570",
     "DAI": "0xc4375b7de8af5a38a93548eb8453a498222c4ff2",
     "DGD": "0xeee3870657e4716670f185df08652dd848fe8f7e",
     "MKR": "0x1dad4783cf3fe3085c1426157ab175a6119a04ba",
