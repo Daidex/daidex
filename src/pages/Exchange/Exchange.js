@@ -92,10 +92,16 @@ class Exchange extends Component {
         network: { tokens },
       } = this.props
 
-      this.zeroEx.token.getBalanceAsync(tokens[token], address)
-        .then((balance) => {
+      Promise.all([
+        this.zeroEx.token.getBalanceAsync(tokens[token], address),
+        this.zeroEx.token.getProxyAllowanceAsync(tokens[token], address)
+      ])
+        .then(([balance, allowAmount]) => {
           this.props.updateBalances({
-            [token]: ZeroEx.toUnitAmount(balance, TOKEN_DECIMALS).toFixed(DECIMALS_TO_SHOW)
+            [token]: {
+              balance: ZeroEx.toUnitAmount(balance, TOKEN_DECIMALS).toFixed(DECIMALS_TO_SHOW),
+              enabled: allowAmount.toNumber() > 0
+            }
           })
         })
         // TODO: handle error
@@ -105,7 +111,9 @@ class Exchange extends Component {
         .then((balance) => {
           const eth = this.web3.utils.fromWei(balance)
           this.props.updateBalances({
-            ETH: eth
+            ETH: {
+              balance: eth
+            }
           })
           callback(eth)
         })
@@ -163,6 +171,10 @@ class Exchange extends Component {
       })
     }, 1000)
   }
+
+  showResults = values => (
+    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`) // eslint-disable-line
+  )
 
   shouldShowMetaMaskError = (view) => {
     return (

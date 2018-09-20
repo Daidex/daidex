@@ -7,7 +7,7 @@ import {
   INIT_EXCHANGE,
   SET_MESSAGE_WRAP,
 } from 'src/store/actions/appActions'
-import { reduce } from 'lodash'
+import { reduce, isUndefined } from 'lodash'
 import appStates from 'src/store/states/appStates'
 import { setToState } from 'src/utils'
 
@@ -95,9 +95,9 @@ export default function appReducer(state = initialState, action = {}) {
               ...result,
               [key]: {
                 symbol: key,
-                balance: value,
+                balance: value.balance,
                 name: tokenName[key] || 'Unknown',
-                enabled: 'loading',
+                enabled: isUndefined(value.enabled) ? 'loading' : value.enabled,
                 value: 0
               }
             }

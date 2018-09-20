@@ -5,56 +5,32 @@ import PropTypes from 'prop-types'
 import { map } from 'lodash'
 
 import Row from 'src/components/Atoms/Row'
-import Switch from 'src/components/Atoms/Switch'
+import Switch from 'src/components/Molecules/AllowenceSwitch'
 import styles from './TradeTableStyles.sass'
 
 const defaultHeaders = ['Simbolo', 'Nombre', 'Estado', 'Balance', 'Valor (MXN)']
-const defaultData = [
-  {
-    symbol: 'ETH',
-    name: 'Ethereum',
-    enabled: true,
-    balance: 0.0000132,
-    value: 1000.00
-  },
-  {
-    symbol: 'WETH',
-    name: 'Wrapper ETH',
-    enabled: true,
-    balance: 0.0000123,
-    value: 500.00
-  },
-  {
-    symbol: 'DAI',
-    name: 'DAI',
-    enabled: true,
-    balance: 0.0000132,
-    value: 1000.00
-  }
-]
 
 class TradeTable extends Component {
   static propTypes = {
     openWrapModal: PropTypes.func.isRequired,
     headers: PropTypes.array,
-    data: PropTypes.arrayOf(PropTypes.shape({
-      symbol: PropTypes.string,
-      name: PropTypes.string,
-      enabled: PropTypes.bool,
-      balance: PropTypes.number,
-      value: PropTypes.number
-    }))
+    data: PropTypes.oneOfType([
+      PropTypes.shape({}),
+      PropTypes.array,
+    ]).isRequired,
   }
 
   static defaultProps = {
     headers: defaultHeaders,
-    data: defaultData,
   }
 
   componentDidMount() {}
 
   handleAfterClick = (ev, symbol) => {
-    if (ev.nativeEvent.offsetX > ev.target.offsetWidth) {
+    if (
+      ev.nativeEvent.offsetX > ev.target.offsetWidth
+      && (symbol === 'ETH' || symbol === 'WETH')
+    ) {
       const isWrap = symbol === 'ETH'
       this.props.openWrapModal(isWrap)
     }
@@ -81,8 +57,9 @@ class TradeTable extends Component {
                   <td>
                     <span>
                       <Switch
-                        // isController
-                        checked={item.enabled}
+                        isController
+                        disabled={item.symbol === 'ETH'}
+                        state={item.symbol === 'ETH' ? true : item.enabled}
                         onChange={checked => console.log('allowed', checked)}
                       />
                     </span>
@@ -122,8 +99,9 @@ class TradeTable extends Component {
                   <td>
                     <span>
                       <Switch
-                        // isController
-                        checked={item.enabled}
+                        isController
+                        disabled={item.symbol === 'ETH'}
+                        state={item.symbol === 'ETH' ? true : item.enabled}
                         onChange={checked => console.log('allowed', checked)}
                       />
                     </span>
