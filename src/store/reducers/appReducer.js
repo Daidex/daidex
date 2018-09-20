@@ -5,6 +5,7 @@ import {
   UPDATE_BALANCES,
   UPDATE_ACCOUNT,
   INIT_EXCHANGE,
+  SET_MESSAGE_WRAP,
 } from 'src/store/actions/appActions'
 import { reduce } from 'lodash'
 import appStates from 'src/store/states/appStates'
@@ -17,7 +18,13 @@ export const initialState = {
   ui: {
     view: appStates.view.connectingWithMetaMask,
     previousView: appStates.view.connectingWithMetaMask,
-    loading: false
+    loading: false,
+    wrap: {
+      message: {
+        msg: '',
+        type: '',
+      }
+    }
   },
   data: {
     network: {
@@ -96,6 +103,11 @@ export default function appReducer(state = initialState, action = {}) {
             }
           }, {})
         }
+      })
+
+    case SET_MESSAGE_WRAP:
+      return setToState(state, {
+        'ui.wrap.message': action.payload.message
       })
 
     default:

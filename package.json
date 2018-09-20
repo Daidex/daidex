@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "0x.js": "^0.38.6",
+    "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^4.3.0",
     "es6-promisify": "^6.0.0",

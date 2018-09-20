@@ -1,9 +1,12 @@
+import 'babel-polyfill'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Web3 from 'web3'
 import { ZeroEx } from '0x.js'
+import { wrap_ether, unwrap_ether } from 'src/methods/wrap-unwrap'
+import { get } from 'lodash'
 
 import {
   changeView,
@@ -11,6 +14,7 @@ import {
   initExchange,
   updateAccount,
   updateBalances,
+  setMessageWrap,
 } from 'src/store/actions/appActions'
 
 import Row from 'src/components/Atoms/Row'
@@ -42,14 +46,20 @@ class Exchange extends Component {
     }).isRequired,
     network: PropTypes.shape({
       name: PropTypes.string,
+      tokens: PropTypes.object,
     }).isRequired,
     view: PropTypes.string.isRequired,
+    wrap_message: PropTypes.shape({
+      type: PropTypes.string,
+      msg: PropTypes.string,
+    }).isRequired,
     previousView: PropTypes.string.isRequired,
     changeView: PropTypes.func.isRequired,
     setNetwork: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
     updateBalances: PropTypes.func.isRequired,
     initExchange: PropTypes.func.isRequired,
+    setMessageWrap: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -76,7 +86,7 @@ class Exchange extends Component {
     })
   }
 
-  getBalance = (address, token) => {
+  getBalance = (address, token, callback = () => {}) => {
     if (token) {
       const {
         network: { tokens },
@@ -92,9 +102,13 @@ class Exchange extends Component {
         .catch(err => console.error('Something was wrong:', err))
     } else {
       this.web3.eth.getBalance(address)
-        .then(balance => this.props.updateBalances({
-          ETH: this.web3.utils.fromWei(balance)
-        }))
+        .then((balance) => {
+          const eth = this.web3.utils.fromWei(balance)
+          this.props.updateBalances({
+            ETH: eth
+          })
+          callback(eth)
+        })
         // TODO: handle error
         .catch(err => console.error('Something was wrong:', err))
     }
@@ -150,10 +164,6 @@ class Exchange extends Component {
     }, 1000)
   }
 
-  showResults = values => (
-    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-  )
-
   shouldShowMetaMaskError = (view) => {
     return (
       view === appStates.view.metaMaskFailToConnect
@@ -174,6 +184,69 @@ class Exchange extends Component {
     )
   }
 
+  actionWrapUnwrap = async (values) => {
+    const wrap = this.props.view === appStates.view.exchangeWrap
+    const amount = parseFloat(values.coin)
+    const balance = get(
+      this.props.wallet.balances,
+      `${wrap ? 'ETH' : 'WETH'}.balance`,
+      0
+    )
+    const token = get(this.props.network.tokens, 'WETH', 0)
+    const wrap_unwrap_method = wrap ? wrap_ether : unwrap_ether
+
+    if (balance > amount && amount > 0 && balance > 0) {
+      let msg;
+      msg = await wrap_unwrap_method(amount, token)
+      if (String(msg).substring(0, 2) !== '0x') {
+        // set error to state
+        this.props.setMessageWrap({
+          msg: 'transacción cancelada.',
+          type: 'error'
+        })
+      } else {
+        msg = String(msg)
+        // set message to state
+        this.props.setMessageWrap({
+          msg: 'Transacción aceptada.',
+          type: 'success'
+        })
+        // await Transaction mined
+        await this.zeroEx.awaitTransactionMinedAsync(msg, 1500)
+        // set message to state
+        this.props.setMessageWrap({
+          msg: 'Transacción confirmada.',
+          type: 'success'
+        })
+        // Updating ETH/WETH balances
+        this.getBalance(this.props.wallet.address, 'WETH')
+        const ethBalance = get(this.props.wallet.balances, 'ETH.balance', 0)
+        const updateBalance = setInterval(() => {
+          this.getBalance(this.props.wallet.address, null, (currentBalance) => {
+            if (ethBalance !== currentBalance) {
+              clearInterval(updateBalance)
+            }
+          })
+        }, 1500)
+      }
+    } else if (!amount) {
+      this.props.setMessageWrap({
+        msg: 'Introduce una cantidad real.',
+        type: 'warning'
+      })
+    } else if (amount > balance) {
+      this.props.setMessageWrap({
+        msg: 'No tienes fondos suficientes.',
+        type: 'warning'
+      })
+    } else {
+      this.props.setMessageWrap({
+        msg: 'Algo ha ido mal.',
+        type: 'error'
+      })
+    }
+  }
+
   render() {
     const { view } = this.props
     return (
@@ -187,9 +260,11 @@ class Exchange extends Component {
           onCloseModal={this.closeWrapModal}
         >
           <WrapForm
-            onSubmit={this.showResults}
+            onSubmit={this.actionWrapUnwrap}
             wrap={view === appStates.view.exchangeWrap}
             balances={this.props.wallet.balances}
+            message={this.props.wrap_message}
+            setMessageWrap={this.props.setMessageWrap}
           />
         </Modal>
         {!this.shouldShowMetaMaskError(view)
@@ -212,6 +287,7 @@ const mapStateToProps = state => ({
   previousView: state.app.ui.previousView,
   wallet: state.app.data.wallet,
   network: state.app.data.network,
+  wrap_message: state.app.ui.wrap.message,
 })
 
 const mapDispatchToProps = dispatch => (
@@ -221,6 +297,7 @@ const mapDispatchToProps = dispatch => (
     initExchange,
     updateAccount,
     updateBalances,
+    setMessageWrap,
   }, dispatch)
 )
 

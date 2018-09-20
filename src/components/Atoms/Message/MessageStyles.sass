@@ -1,0 +1,52 @@
+@charset 'utf-8'
+
+@import 'src/styles/resources'
+
+.warning
+  color: #F8A602
+  font-size: 14px
+  margin: 0
+  &::before
+    content: "❗"
+    display: inline-block
+    width: 0
+    height: 0
+    border-left: 12px solid transparent
+    border-right: 12px solid transparent
+    border-bottom: 17px solid #F8A602
+    border-radius: 3px
+    color: white
+    font-weight: bold
+    margin: 0 5px
+
+.error
+  color: red
+  font-size: 14px
+  margin: 0
+  &::before
+    content: "X"
+    display: inline-block
+    width: 0
+    height: 0
+    color: red
+    font-weight: bold
+    margin: 0 15px 0 5px
+
+.success
+  color: green
+  font-size: 14px
+  margin: 0
+  position: relative
+  padding-left: 25px
+  &::before
+    content: "✔"
+    display: inline-block
+    width: 0
+    height: 0
+    color: green
+    font-weight: bold
+    font-size: 30px
+    position: absolute
+    top: -12px
+    left: 0
+    margin: 0 15px 0 5px
