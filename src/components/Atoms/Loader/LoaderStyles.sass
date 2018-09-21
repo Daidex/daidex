@@ -46,3 +46,20 @@
 
   100%
     transform: rotate(360deg)
+
+
+.loader
+  display: inline-block
+  border: 5px solid transparentize($gray-color, 0.7)
+  border-radius: 50%
+  border-top: 5px solid transparentize($green-color, 0.4)
+  width: 20px
+  height: 20px
+  -webkit-animation: spin 2s linear infinite
+  animation: spin 2s linear infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)

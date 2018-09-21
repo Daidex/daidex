@@ -11,11 +11,13 @@ class SwitchComp extends Component {
     checked: PropTypes.bool,
     isController: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
     isController: false,
-    checked: false
+    checked: false,
+    disabled: false
   }
 
   state = {
@@ -33,7 +35,7 @@ class SwitchComp extends Component {
   }
 
   render() {
-    const { checked, isController } = this.props
+    const { checked, isController, disabled } = this.props
     return (
       <Row className={styles.container} withoutSpacing>
         <Switch
@@ -43,6 +45,7 @@ class SwitchComp extends Component {
           checkedIcon={false}
           className="react-switch"
           id="normal-switch"
+          disabled={disabled}
         />
       </Row>
     )
