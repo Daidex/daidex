@@ -6,8 +6,9 @@ import {
   UPDATE_ACCOUNT,
   INIT_EXCHANGE,
   SET_MESSAGE_WRAP,
+  UPDATE_ALLOWENCE,
 } from 'src/store/actions/appActions'
-import { reduce, isUndefined } from 'lodash'
+import { reduce, isUndefined, get } from 'lodash'
 import appStates from 'src/store/states/appStates'
 import { setToState } from 'src/utils'
 
@@ -104,6 +105,22 @@ export default function appReducer(state = initialState, action = {}) {
           }, {})
         }
       })
+
+    case UPDATE_ALLOWENCE: {
+      const { tokenSymbol, state: checkState } = action.payload
+
+      const token = get(state.data.wallet, `balances.${tokenSymbol}`, {})
+
+      return setToState(state, {
+        'data.wallet.balances': {
+          ...state.data.wallet.balances,
+          [tokenSymbol]: {
+            ...token,
+            enabled: checkState
+          }
+        }
+      })
+    }
 
     case SET_MESSAGE_WRAP:
       return setToState(state, {

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import { map } from 'lodash'
+import { map, isUndefined } from 'lodash'
+
+import { updateAllowence } from 'src/store/actions/appActions'
+import ZeroExWrapper from 'src/services/0xService'
 
 import Row from 'src/components/Atoms/Row'
 import Switch from 'src/components/Molecules/AllowenceSwitch'
@@ -18,13 +21,55 @@ class TradeTable extends Component {
       PropTypes.shape({}),
       PropTypes.array,
     ]).isRequired,
+    network: PropTypes.shape({
+      id: PropTypes.number,
+      tokens: PropTypes.shape({})
+    }).isRequired,
+    updateAllowence: PropTypes.func.isRequired,
+    accountAddress: PropTypes.string,
   }
 
   static defaultProps = {
     headers: defaultHeaders,
+    accountAddress: ''
   }
 
-  componentDidMount() {}
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.accountAddress !== nextProps.accountAddress
+      && !isUndefined(nextProps.accountAddress)
+    ) {
+      this.zeroService = new ZeroExWrapper({
+        currentProvider: global.web3.currentProvider,
+        networkId: nextProps.network.id
+      })
+    }
+  }
+
+  updateAllowence = (item, checked) => {
+    const { network: { tokens }, accountAddress } = this.props
+
+    this.props.updateAllowence({
+      tokenSymbol: item.symbol,
+      state: 'loading'
+    })
+
+    const tokenAddress = tokens[item.symbol]
+
+    this.zeroService.modifyAllowence({
+      tokenAddress,
+      accountAddress,
+      enable: checked
+    })
+      .then(() => this.props.updateAllowence({
+        tokenSymbol: item.symbol,
+        state: checked
+      }))
+      .catch(() => this.props.updateAllowence({
+        tokenSymbol: item.symbol,
+        state: !checked,
+      }))
+  }
 
   handleAfterClick = (ev, symbol) => {
     if (
@@ -102,7 +147,7 @@ class TradeTable extends Component {
                         isController
                         disabled={item.symbol === 'ETH'}
                         state={item.symbol === 'ETH' ? true : item.enabled}
-                        onChange={checked => console.log('allowed', checked)}
+                        onChange={checked => this.updateAllowence(item, checked)}
                       />
                     </span>
                   </td>
@@ -123,7 +168,11 @@ class TradeTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.app.data.wallet.balances
+  network: state.app.data.network,
+  data: state.app.data.wallet.balances,
+  accountAddress: state.app.data.wallet.address,
 })
 
-export default connect(mapStateToProps, {})(TradeTable)
+export default connect(mapStateToProps, {
+  updateAllowence,
+})(TradeTable)
