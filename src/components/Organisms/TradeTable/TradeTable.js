@@ -27,6 +27,12 @@ class TradeTable extends Component {
     }).isRequired,
     updateAllowence: PropTypes.func.isRequired,
     accountAddress: PropTypes.string,
+    currencyRate: PropTypes.shape({
+      ETH: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ])
+    }).isRequired,
   }
 
   static defaultProps = {
@@ -44,6 +50,20 @@ class TradeTable extends Component {
         networkId: nextProps.network.id
       })
     }
+  }
+
+  getCurrencyRateValue = (value, symbol) => {
+    let convertedValue
+
+    if (symbol !== 'WETH') {
+      convertedValue = this.props.currencyRate[symbol] * value
+    } else {
+      convertedValue = this.props.currencyRate.ETH * value
+    }
+
+    return !Number.isNaN(convertedValue)
+      ? convertedValue.toLocaleString()
+      : '0'
   }
 
   updateAllowence = (item, checked) => {
@@ -105,7 +125,7 @@ class TradeTable extends Component {
                         isController
                         disabled={item.symbol === 'ETH'}
                         state={item.symbol === 'ETH' ? true : item.enabled}
-                        onChange={checked => console.log('allowed', checked)}
+                        onChange={() => {}}
                       />
                     </span>
                   </td>
@@ -113,7 +133,7 @@ class TradeTable extends Component {
                     <span>{item.balance}</span>
                   </td>
                   <td>
-                    <span>${item.value.toLocaleString()}</span>
+                    <span>${this.getCurrencyRateValue(item.balance, item.symbol)}</span>
                   </td>
                 </tr>
               ))}
@@ -155,7 +175,7 @@ class TradeTable extends Component {
                     <span>{item.balance}</span>
                   </td>
                   <td>
-                    <span>${item.value.toLocaleString()}</span>
+                    <span>${this.getCurrencyRateValue(item.balance, item.symbol)}</span>
                   </td>
                 </tr>
               ))}
@@ -171,6 +191,7 @@ const mapStateToProps = state => ({
   network: state.app.data.network,
   data: state.app.data.wallet.balances,
   accountAddress: state.app.data.wallet.address,
+  currencyRate: state.app.data.currencyRate,
 })
 
 export default connect(mapStateToProps, {

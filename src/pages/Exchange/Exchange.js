@@ -15,6 +15,7 @@ import {
   updateAccount,
   updateBalances,
   setMessageWrap,
+  getCurrencyExchange,
 } from 'src/store/actions/appActions'
 
 import Row from 'src/components/Atoms/Row'
@@ -60,6 +61,7 @@ class Exchange extends Component {
     updateBalances: PropTypes.func.isRequired,
     initExchange: PropTypes.func.isRequired,
     setMessageWrap: PropTypes.func.isRequired,
+    getCurrencyExchange: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -128,8 +130,8 @@ class Exchange extends Component {
     } = this.props
 
     this.props.initExchange(address)
+    this.props.getCurrencyExchange(tokens)
     this.getBalance(address)
-
 
     Object.keys(tokens)
       .forEach((token) => {
@@ -310,6 +312,7 @@ const mapDispatchToProps = dispatch => (
     updateAccount,
     updateBalances,
     setMessageWrap,
+    getCurrencyExchange,
   }, dispatch)
 )
 
