@@ -7,6 +7,7 @@ import {
   INIT_EXCHANGE,
   SET_MESSAGE_WRAP,
   UPDATE_ALLOWENCE,
+  SET_CURRENCY_EXCHANGE,
 } from 'src/store/actions/appActions'
 import { reduce, isUndefined, get } from 'lodash'
 import appStates from 'src/store/states/appStates'
@@ -34,7 +35,8 @@ export const initialState = {
     wallet: {
       loaded: false,
       balances: {}
-    }
+    },
+    currencyRate: {}
   }
 }
 
@@ -125,6 +127,11 @@ export default function appReducer(state = initialState, action = {}) {
     case SET_MESSAGE_WRAP:
       return setToState(state, {
         'ui.wrap.message': action.payload.message
+      })
+
+    case SET_CURRENCY_EXCHANGE:
+      return setToState(state, {
+        'data.currencyRate': action.payload.tokens
       })
 
     default:
