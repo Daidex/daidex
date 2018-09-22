@@ -62,7 +62,7 @@ class TradeTable extends Component {
     }
 
     return !Number.isNaN(convertedValue)
-      ? convertedValue.toLocaleString()
+      ? convertedValue.toLocaleString('de-DE', { currency: 'MXN', maximumFractionDigits: 2 })
       : '0'
   }
 
