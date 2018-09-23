@@ -118,13 +118,21 @@ class Dropdown extends Component {
         {...omit(rest, ['initialSelected', 'closeAfterSelected'])}
         // onBlur={this.handleBlur}
       >
-        <Row className={styles.selected}>
+        <Row withoutSpacing className={styles.selected}>
           <Link
             theme="dropdown"
             onClick={this.handleClick}
           >
             {!template ? this.showLabel() : template(this.state.selected)}
-            <Icon name="arrow-down" theme="token" />
+            <Icon
+              name="arrow-down"
+              theme="token"
+              style={{
+                position: 'relative',
+                top: '-5px',
+                height: '30px'
+              }}
+            />
           </Link>
           <ul
             id="listbox"

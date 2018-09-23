@@ -30,7 +30,7 @@ export const initialState = {
   },
   data: {
     network: {
-
+      tokens: {}
     },
     wallet: {
       loaded: false,

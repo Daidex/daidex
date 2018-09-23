@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Field, reduxForm } from 'redux-form'
 import classnames from 'classnames'
+
+import { convertTokenTo } from 'src/services/currency'
 
 import Row from 'src/components/Atoms/Row'
 import Col from 'src/components/Atoms/Col'
@@ -8,48 +12,71 @@ import Text from 'src/components/Atoms/Text'
 import Button from 'src/components/Atoms/Button'
 import Icon from 'src/components/Atoms/Icon'
 import Dropdown from 'src/components/Molecules/Dropdown'
-import TradeInput from 'src/components/Molecules/TradeInput'
+import InputRedux from 'src/components/Molecules/InputRedux'
 
 import copies from './copies.json'
 import styles from './TradeFormStyles.sass'
 
 class TradeForm extends Component {
   static propTypes = {
-    maxValue: PropTypes.number,
     className: PropTypes.string,
+    tokens: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
-    maxValue: 300,
     className: ''
   }
 
   state = {
-    value: 100,
+    takerChoice: '',
+    makerChoice: '',
+    tokenCurrencyRate: 0,
   }
 
   componentDidMount() {}
 
-  handleOnChange = (value) => {
-    this.setState({ value: Number(value) })
+  getCurrencyRate = ({ from, to }) => {
+    convertTokenTo({ from, to })
+      .then(rate => this.setState({ tokenCurrencyRate: rate }))
+      .catch(console.log)
   }
 
-  handleOnMaxPress = () => {
-    this.setState({ value: this.props.maxValue })
+  handleInputChange = (value) => {
+    this.setState(() => ({
+      takerValue: value
+    }))
+  }
+
+  handleSubmit = (values) => {
+    console.log('values', values)
+  }
+
+  handleSelection = (value, key) => {
+    this.setState({ [key]: value }, () => {
+      this.getCurrencyRate({
+        from: this.state.takerChoice !== 'WETH' ? this.state.takerChoice : 'ETH',
+        to: this.state.makerChoice !== 'WETH' ? this.state.makerChoice : 'ETH',
+      })
+    })
   }
 
   render() {
-    const { className } = this.props
+    const { className, tokens } = this.props
+    const {
+      takerChoice, makerChoice, tokenCurrencyRate, takerValue
+    } = this.state
 
     const classNames = classnames(styles.container, {
       [className]: !!className
     })
 
+    const makerValue = (takerValue * tokenCurrencyRate)
+
     return (
-      <Col
+      <form
         className={classNames}
-        withoutSpacing
         style={{ marginRight: '20px' }}
+        onSubmit={this.handleSubmit}
       >
         <Text component="h3" theme="form-title">{copies.form_title}</Text>
         <Row className={styles.soldContainer}>
@@ -60,25 +87,18 @@ class TradeForm extends Component {
             theme="tokens"
             className={styles.dropdown}
             label="Choose an option"
-            source={[
-              {
-                value: 'ETH',
-                label: 'ETH',
-              },
-              {
-                value: 'WETH',
-                label: 'WETH'
-              }
-            ]}
+            source={tokens.filter(token => token.value !== makerChoice)}
+            onChange={({ value }) => this.handleSelection(value, 'takerChoice')}
           />
-          <TradeInput
-            onMaxPress={this.handleOnMaxPress}
-            onChange={this.handleOnChange}
-            payload={{
-              token: 'WETH',
-              value: this.state.value
+          <Field
+            name="taker"
+            component={InputRedux}
+            type="number"
+            className={styles.input}
+            onChange={(e, newValue) => {
+              this.handleInputChange(newValue)
             }}
-            autoSize
+            disabled={!takerChoice}
           />
         </Row>
         <Row withoutSpacing className={styles.iconContainer}>
@@ -92,36 +112,53 @@ class TradeForm extends Component {
             theme="tokens"
             className={styles.dropdown}
             label="Choose an option"
-            source={[
-              {
-                value: 'ETH',
-                label: 'ETH',
-              },
-              {
-                value: 'WETH',
-                label: 'WETH'
-              }
-            ]}
+            source={tokens.filter(token => token.value !== takerChoice)}
+            onChange={({ value }) => this.handleSelection(value, 'makerChoice')}
           />
-          <TradeInput
-            onMaxPress={this.handleOnMaxPress}
-            onChange={this.handleOnChange}
-            payload={{
-              token: 'WETH',
-              value: this.state.value
-            }}
-            autoSize
+          <InputRedux
+            name="maker"
+            type="number"
+            className={styles.input}
+            value={makerValue ? parseFloat(makerValue.toFixed(8)) : makerValue}
+            placeholder="lorem ipsum dolor"
+            disabled
           />
         </Row>
         <Row className={styles.action}>
-          <Text className={styles.textBase}>1 WETH = 57.991851 ZRX</Text>
+          <Text className={styles.textBase}>
+            {takerChoice && makerChoice
+              ? `1 ${takerChoice} = ${tokenCurrencyRate} ${makerChoice}`
+              : null
+            }
+          </Text>
           <Col>
-            <Button theme="secondary" onClick={() => console.log('Trade')}>{copies.cta_label}</Button>
+            <Button
+              type="submit"
+              theme="secondary"
+              onClick={() => console.log('Trade')}
+            >
+              {copies.cta_label}
+            </Button>
           </Col>
         </Row>
-      </Col>
+      </form>
     )
   }
 }
 
-export default TradeForm
+const maptStateToProps = state => ({
+  tokens: Object.keys(state.app.data.network.tokens)
+    .reduce((result, curr) => ([
+      ...result,
+      {
+        value: curr,
+        label: curr
+      }
+    ]), [])
+})
+
+const TradeFormConnected = connect(maptStateToProps, {})(TradeForm)
+
+export default reduxForm({
+  form: 'trading'
+})(TradeFormConnected)

@@ -13,6 +13,7 @@ const InputRedux = ({
   className,
   input,
   disabled,
+  ...rest
 }) => {
   return (
     <Row style={{ display: 'flex' }}>
@@ -22,8 +23,9 @@ const InputRedux = ({
         placeholder={placeholder}
         style={{ ...style }}
         className={className}
-        onChange={input.onChange}
+        onChange={input ? input.onChange : () => {}}
         disabled={disabled}
+        {...rest}
       />
     </Row>
   )
