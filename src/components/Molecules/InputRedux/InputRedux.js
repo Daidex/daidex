@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 // import components
 import Row from 'src/components/Atoms/Row'
 import Input from 'src/components/Atoms/Input'
+import Message from 'src/components/Atoms/Message'
+
+import styles from './InputReduxStyles.sass'
 
 const InputRedux = ({
   name,
@@ -12,11 +15,14 @@ const InputRedux = ({
   style,
   className,
   input,
+  meta,
   disabled,
   ...rest
 }) => {
+  const error = meta && meta.error && meta.dirty ? meta.error : ''
+
   return (
-    <Row style={{ display: 'flex' }}>
+    <Row className={styles.container}>
       <Input
         name={name}
         type={type}
@@ -27,12 +33,18 @@ const InputRedux = ({
         disabled={disabled}
         {...rest}
       />
+      <Row>
+        <Message type="warning" style={{ opacity: error ? 1 : 0 }}>
+          {error}
+        </Message>
+      </Row>
     </Row>
   )
 }
 
 InputRedux.propTypes = {
   input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
   style: PropTypes.object,
   className: PropTypes.string,
   name: PropTypes.string,

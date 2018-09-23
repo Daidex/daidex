@@ -11,6 +11,7 @@ export const UPDATE_BALANCES = '@app/UPDATE_BALANCES'
 export const SET_MESSAGE_WRAP = '@app/SET_MESSAGE_WRAP'
 export const UPDATE_ALLOWENCE = '@app/UPDATE_ALLOWENCE'
 export const SET_CURRENCY_EXCHANGE = '@app/SET_CURRENCY_EXCHANGE'
+export const SET_DROPDOWN_OPTION = '@app/SET_DROPDOWN_OPTION'
 
 const toggleLoadingAction = createAction(TOGGLE_LOADING)
 const changeViewAction = createAction(CHANGE_VIEW)
@@ -21,6 +22,7 @@ const updateBalancesAction = createAction(UPDATE_BALANCES)
 const setMessageWrapAction = createAction(SET_MESSAGE_WRAP)
 const updateAllowenceAction = createAction(UPDATE_ALLOWENCE)
 const setCurrentExchageAction = createAction(SET_CURRENCY_EXCHANGE)
+const setDropdownOptionAction = createAction(SET_DROPDOWN_OPTION)
 
 export const toggleLoading = isLoading => toggleLoadingAction({ isLoading })
 export const changeView = nextView => changeViewAction({ nextView })
@@ -32,6 +34,7 @@ export const setMessageWrap = message => setMessageWrapAction({ message })
 export const updateAllowence = ({ tokenSymbol, state }) => {
   return updateAllowenceAction({ tokenSymbol, state })
 }
+export const setDropdownOption = field => setDropdownOptionAction({ ...field })
 
 export const getCurrencyExchange = tokensKeys => (dispatch) => {
   const tokens = without([
