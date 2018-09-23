@@ -146,7 +146,7 @@ class TradeForm extends Component {
           <Text className={styles.textBase}>
             {takerChoice && makerChoice
               ? `1 ${takerChoice} = ${tokenCurrencyRate} ${makerChoice}`
-              : null
+              : ''
             }
           </Text>
           <Col>

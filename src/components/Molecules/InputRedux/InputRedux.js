@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { isEmpty } from 'lodash'
 
 // import components
 import Row from 'src/components/Atoms/Row'
@@ -19,7 +20,7 @@ const InputRedux = ({
   disabled,
   ...rest
 }) => {
-  const error = meta && meta.error && meta.dirty ? meta.error : ''
+  const error = !isEmpty(meta) && meta.error && meta.dirty ? meta.error : ''
 
   return (
     <Row className={styles.container}>
@@ -29,7 +30,7 @@ const InputRedux = ({
         placeholder={placeholder}
         style={{ ...style }}
         className={className}
-        onChange={input ? input.onChange : () => {}}
+        onChange={!isEmpty(input) ? input.onChange : () => {}}
         disabled={disabled}
         {...rest}
       />
@@ -43,8 +44,8 @@ const InputRedux = ({
 }
 
 InputRedux.propTypes = {
-  input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
+  input: PropTypes.object,
+  meta: PropTypes.object,
   style: PropTypes.object,
   className: PropTypes.string,
   name: PropTypes.string,
@@ -60,6 +61,8 @@ InputRedux.defaultProps = {
   type: 'text',
   placeholder: '',
   disabled: false,
+  meta: {},
+  input: {},
 }
 
 export default InputRedux
