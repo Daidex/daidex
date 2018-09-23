@@ -12,7 +12,7 @@ class Input extends Component {
   constructor(props) {
     super(props)
 
-    this.isController = !!this.props.value
+    this.isController = this.props.value !== (undefined || null)
     this.state = {
       value: ''
     }
