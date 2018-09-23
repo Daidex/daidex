@@ -5,6 +5,7 @@
 .container
   width: 100%
   border-collapse: separate
+  font-size: 14px
   padding: size(10)
   border-radius: size(8)
   background-color: transparentize($cobalt-dark, 0.4)
@@ -71,3 +72,17 @@
 
 .collapse
   visibility: collapse
+
+.scroll
+  max-height: calc(100vh - 220px)
+  display: block
+  overflow-y: auto
+
+  &::-webkit-scrollbar
+    width: 5px
+
+  &::-webkit-scrollbar-track
+    background: #f1f1f1
+
+  &::-webkit-scrollbar-thumb
+    background: #888

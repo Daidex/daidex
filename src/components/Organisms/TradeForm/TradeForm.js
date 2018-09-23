@@ -78,13 +78,14 @@ class TradeForm extends Component {
         style={{ marginRight: '20px' }}
         onSubmit={this.handleSubmit}
       >
-        <Text component="h3" theme="form-title">{copies.form_title}</Text>
+        <Text component="h3" theme="h3">{copies.form_title}</Text>
         <Row className={styles.soldContainer}>
           <Col>
             <Text theme="light-text" component="span">{copies.sold_label}</Text>
           </Col>
           <Dropdown
             theme="tokens"
+            spacing={{ left: 0, right: 0 }}
             className={styles.dropdown}
             label="Choose an option"
             source={tokens.filter(token => token.value !== makerChoice)}
@@ -110,6 +111,7 @@ class TradeForm extends Component {
           </Col>
           <Dropdown
             theme="tokens"
+            spacing={{ left: 0, right: 0 }}
             className={styles.dropdown}
             label="Choose an option"
             source={tokens.filter(token => token.value !== takerChoice)}
