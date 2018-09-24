@@ -15,6 +15,7 @@ import { convertTokenTo } from 'src/services/currency'
 
 import Row from 'src/components/Atoms/Row'
 import Col from 'src/components/Atoms/Col'
+import Loader from 'src/components/Atoms/Loader'
 import Text from 'src/components/Atoms/Text'
 import Button from 'src/components/Atoms/Button'
 import Icon from 'src/components/Atoms/Icon'
@@ -167,76 +168,79 @@ class TradeForm extends Component {
     })
 
     return (
-      <form
-        className={classNames}
-        style={{ marginRight: '20px' }}
-        onSubmit={handleSubmit(this.handleSubmit)}
-      >
-        <Text component="h3" theme="form-title">{copies.form_title}</Text>
-        <Row className={styles.soldContainer}>
-          <Col>
-            <Text theme="light-text" component="span">{copies.sold_label}</Text>
-          </Col>
-          <Dropdown
-            theme="tokens"
-            className={styles.dropdown}
-            label="Choose an option"
-            source={tokens.filter(token => token.value !== makerChoice)}
-            onChange={({ value }) => this.handleSelection(value, 'takerChoice')}
-          />
-          <Field
-            name="taker"
-            component={InputRedux}
-            type="number"
-            className={styles.input}
-            onChange={(e, newValue) => {
-              this.handleInputChange(newValue)
-            }}
-            step="0.000001"
-            disabled={!takerChoice}
-          />
-        </Row>
-        <Row withoutSpacing className={styles.iconContainer}>
-          <Icon theme="exchange-green" name="exchange-arrows" />
-        </Row>
-        <Row className={styles.buyContainer}>
-          <Col>
-            <Text theme="light-text" component="span">{copies.buy_label}</Text>
-          </Col>
-          <Dropdown
-            theme="tokens"
-            className={styles.dropdown}
-            label="Choose an option"
-            source={tokens.filter(token => token.value !== takerChoice)}
-            onChange={({ value }) => this.handleSelection(value, 'makerChoice')}
-          />
-          <InputRedux
-            name="maker"
-            type="number"
-            className={styles.input}
-            value={amountToReceive}
-            placeholder="lorem ipsum dolor"
-            disabled
-          />
-        </Row>
-        <Row className={styles.action}>
-          <Text className={styles.textBase} style={{ display: 'none' }}>
-            {takerChoice && makerChoice
-              ? `1 ${takerChoice} = ${tokenCurrencyRate} ${makerChoice}`
-              : ''
-            }
-          </Text>
-          <Col>
-            <Button
-              type="submit"
-              theme="secondary"
-              disabled={invalid || submitting}
-            >
-              {copies.cta_label}
-            </Button>
-          </Col>
-        </Row>
-      </form>
+      <div style={{ position: 'relative' }} className={className}>
+        {submitting && <Loader size="72" />}
+        <form
+          className={classNames}
+          style={{ marginRight: '20px' }}
+          onSubmit={handleSubmit(this.handleSubmit)}
+        >
+          <Text component="h3" theme="form-title">{copies.form_title}</Text>
+          <Row className={styles.soldContainer}>
+            <Col>
+              <Text theme="light-text" component="span">{copies.sold_label}</Text>
+            </Col>
+            <Dropdown
+              theme="tokens"
+              className={styles.dropdown}
+              label="Choose an option"
+              source={tokens.filter(token => token.value !== makerChoice)}
+              onChange={({ value }) => this.handleSelection(value, 'takerChoice')}
+            />
+            <Field
+              name="taker"
+              component={InputRedux}
+              type="number"
+              className={styles.input}
+              onChange={(e, newValue) => {
+                this.handleInputChange(newValue)
+              }}
+              step="0.000001"
+              disabled={!takerChoice}
+            />
+          </Row>
+          <Row withoutSpacing className={styles.iconContainer}>
+            <Icon theme="exchange-green" name="exchange-arrows" />
+          </Row>
+          <Row className={styles.buyContainer}>
+            <Col>
+              <Text theme="light-text" component="span">{copies.buy_label}</Text>
+            </Col>
+            <Dropdown
+              theme="tokens"
+              className={styles.dropdown}
+              label="Choose an option"
+              source={tokens.filter(token => token.value !== takerChoice)}
+              onChange={({ value }) => this.handleSelection(value, 'makerChoice')}
+            />
+            <InputRedux
+              name="maker"
+              type="number"
+              className={styles.input}
+              value={amountToReceive}
+              placeholder="lorem ipsum dolor"
+              disabled
+            />
+          </Row>
+          <Row className={styles.action}>
+            <Text className={styles.textBase} style={{ display: 'none' }}>
+              {takerChoice && makerChoice
+                ? `1 ${takerChoice} = ${tokenCurrencyRate} ${makerChoice}`
+                : ''
+              }
+            </Text>
+            <Col>
+              <Button
+                type="submit"
+                theme="secondary"
+                disabled={invalid || submitting}
+              >
+                {copies.cta_label}
+              </Button>
+            </Col>
+          </Row>
+        </form>
+      </div>
     )
   }
 }
