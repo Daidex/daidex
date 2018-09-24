@@ -45,6 +45,8 @@ class SwitchComp extends Component {
           checkedIcon={false}
           className="react-switch"
           id="normal-switch"
+          height={21}
+          width={48}
           disabled={disabled}
         />
       </Row>
