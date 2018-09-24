@@ -10,6 +10,7 @@ import Button from 'src/components/Atoms/Button'
 import number1 from 'assets/img/n1.png'
 import number2 from 'assets/img/n2.png'
 import number3 from 'assets/img/n3.png'
+import number4 from 'assets/img/n4.png'
 
 import copies from './copies.json'
 
@@ -95,9 +96,9 @@ class Home extends Component {
             <Row spacing={{ top: 10, bottom: 10 }}>
               <Row style={{ display: 'flex', alignItems: 'center' }}>
                 <img
-                  src={number3}
+                  src={number4}
                   width={70}
-                  alt="number 3"
+                  alt="number 4"
                   style={{
                     marginLeft: '-100px',
                     marginRight: '30px'
