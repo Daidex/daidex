@@ -9,9 +9,10 @@ import styles from './MessageStyles.sass'
 const Message = ({
   children,
   type,
+  ...rest
 }) => {
   return (
-    <Row spacing={{ top: 0, bottom: 0 }}>
+    <Row spacing={{ top: 0, bottom: 0 }} {...rest}>
       <Text className={styles[type]}>
         {children}
       </Text>
