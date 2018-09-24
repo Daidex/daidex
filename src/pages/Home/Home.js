@@ -32,6 +32,9 @@ class Home extends Component {
             <Button theme="primary" to="/exchange">
               TAKE ME IN
             </Button>
+            <Button theme="primary" to="/how-to-start">
+              COMO EMPEZAR
+            </Button>
           </Row>
         </Col>
         <Col className={styles.content} spacing={{ left: 20 }}>
