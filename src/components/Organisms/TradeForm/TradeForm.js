@@ -87,7 +87,7 @@ class TradeForm extends Component {
             theme="tokens"
             spacing={{ left: 0, right: 0 }}
             className={styles.dropdown}
-            label="Choose an option"
+            label="Seleccione un token"
             source={tokens.filter(token => token.value !== makerChoice)}
             onChange={({ value }) => this.handleSelection(value, 'takerChoice')}
           />
@@ -96,6 +96,7 @@ class TradeForm extends Component {
             component={InputRedux}
             type="number"
             className={styles.input}
+            placeholder="Cantidad a vender"
             onChange={(e, newValue) => {
               this.handleInputChange(newValue)
             }}
@@ -113,7 +114,7 @@ class TradeForm extends Component {
             theme="tokens"
             spacing={{ left: 0, right: 0 }}
             className={styles.dropdown}
-            label="Choose an option"
+            label="Seleccione un token"
             source={tokens.filter(token => token.value !== takerChoice)}
             onChange={({ value }) => this.handleSelection(value, 'makerChoice')}
           />
@@ -122,7 +123,7 @@ class TradeForm extends Component {
             type="number"
             className={styles.input}
             value={makerValue ? parseFloat(makerValue.toFixed(8)) : makerValue}
-            placeholder="lorem ipsum dolor"
+            placeholder="Cantidad aproximada a recibir"
             disabled
           />
         </Row>
