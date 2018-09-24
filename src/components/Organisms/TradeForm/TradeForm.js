@@ -78,15 +78,16 @@ class TradeForm extends Component {
         style={{ marginRight: '20px' }}
         onSubmit={this.handleSubmit}
       >
-        <Text component="h3" theme="form-title">{copies.form_title}</Text>
+        <Text component="h3" theme="h3">{copies.form_title}</Text>
         <Row className={styles.soldContainer}>
           <Col>
             <Text theme="light-text" component="span">{copies.sold_label}</Text>
           </Col>
           <Dropdown
             theme="tokens"
+            spacing={{ left: 0, right: 0 }}
             className={styles.dropdown}
-            label="Choose an option"
+            label="Seleccione un token"
             source={tokens.filter(token => token.value !== makerChoice)}
             onChange={({ value }) => this.handleSelection(value, 'takerChoice')}
           />
@@ -95,6 +96,7 @@ class TradeForm extends Component {
             component={InputRedux}
             type="number"
             className={styles.input}
+            placeholder="Cantidad a vender"
             onChange={(e, newValue) => {
               this.handleInputChange(newValue)
             }}
@@ -110,8 +112,9 @@ class TradeForm extends Component {
           </Col>
           <Dropdown
             theme="tokens"
+            spacing={{ left: 0, right: 0 }}
             className={styles.dropdown}
-            label="Choose an option"
+            label="Seleccione un token"
             source={tokens.filter(token => token.value !== takerChoice)}
             onChange={({ value }) => this.handleSelection(value, 'makerChoice')}
           />
@@ -120,7 +123,7 @@ class TradeForm extends Component {
             type="number"
             className={styles.input}
             value={makerValue ? parseFloat(makerValue.toFixed(8)) : makerValue}
-            placeholder="lorem ipsum dolor"
+            placeholder="Cantidad aproximada a recibir"
             disabled
           />
         </Row>

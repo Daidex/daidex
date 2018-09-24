@@ -141,7 +141,7 @@ class TradeTable extends Component {
           </table>
         </Row>
         <Row>
-          <table className={classnames(styles.container, styles.body)}>
+          <table className={classnames(styles.container, styles.body, styles.scroll)}>
             <tbody>
               <tr className={styles.collapse}>
                 {map(headers, title => <th key={title}>{title}</th>)}

@@ -10,6 +10,7 @@ import Button from 'src/components/Atoms/Button'
 import number1 from 'assets/img/n1.png'
 import number2 from 'assets/img/n2.png'
 import number3 from 'assets/img/n3.png'
+import number4 from 'assets/img/n4.png'
 
 import copies from './copies.json'
 
@@ -41,19 +42,13 @@ class Home extends Component {
                   }}
                 />
                 <Text theme="h2" className={styles.title}>
-                  Conecta tu Wallet
+                  {copies.step_1.title}
                 </Text>
               </Row>
               <Row spacing={{ top: 10, bottom: 10 }}>
                 <Text className={styles.description}>
-                  {copies.step_1}
+                  {copies.step_1.description}
                 </Text>
-                <Col spacing={{ left: 25, right: 25 }}>
-                  <Text className={styles.helpText}>
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                  </Text>
-                </Col>
               </Row>
             </Row>
             <Row spacing={{ top: 10, bottom: 10 }}>
@@ -68,19 +63,13 @@ class Home extends Component {
                   }}
                 />
                 <Text theme="h2" className={styles.title}>
-                  Wrappea Ether
+                  {copies.step_2.title}
                 </Text>
               </Row>
               <Row spacing={{ top: 10, bottom: 10 }}>
                 <Text className={styles.description}>
-                  {copies.step_2}
+                  {copies.step_2.description}
                 </Text>
-                <Col spacing={{ left: 25, right: 25 }}>
-                  <Text className={styles.helpText}>
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                  </Text>
-                </Col>
               </Row>
             </Row>
             <Row spacing={{ top: 10, bottom: 10 }}>
@@ -95,19 +84,34 @@ class Home extends Component {
                   }}
                 />
                 <Text theme="h2" className={styles.title}>
-                  Desbloquea tus Tokens
+                  {copies.step_3.title}
                 </Text>
               </Row>
               <Row spacing={{ top: 10, bottom: 10 }}>
                 <Text className={styles.description}>
-                  {copies.step_3}
+                  {copies.step_3.description}
                 </Text>
-                <Col spacing={{ left: 25, right: 25 }}>
-                  <Text className={styles.helpText}>
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
-                  </Text>
-                </Col>
+              </Row>
+            </Row>
+            <Row spacing={{ top: 10, bottom: 10 }}>
+              <Row style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={number4}
+                  width={70}
+                  alt="number 4"
+                  style={{
+                    marginLeft: '-100px',
+                    marginRight: '30px'
+                  }}
+                />
+                <Text theme="h2" className={styles.title}>
+                  {copies.step_4.title}
+                </Text>
+              </Row>
+              <Row spacing={{ top: 10, bottom: 10 }}>
+                <Text className={styles.description}>
+                  {copies.step_4.description}
+                </Text>
               </Row>
             </Row>
             <Row>

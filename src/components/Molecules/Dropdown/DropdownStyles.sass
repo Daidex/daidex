@@ -2,10 +2,11 @@
 
 @import 'src/styles/resources'
 
-// Base  
+// Base
 .dropdown
   position: relative
   display: inline-block
+  font-size: 14.3px
   // background-color: $white-color
   cursor: pointer
   outline: 0
@@ -21,7 +22,7 @@
   composes: dropdown
   +font-style
   font-family: $quicksand
-  font-size: size($h6-font-size)
+  font-size: size(14)
   background-color: $white-color
   padding: 0 size(0.5, 'em')
   border-radius: size(5)
@@ -34,10 +35,13 @@
 // Element styles
 .selected
   background-color: inherit
+  a
+    font-size: 14.3px
 .open
   .list
-    max-height: 150px
+    max-height: 100px
     visibility: visible
+    margin-top: -5px
 
 .list
   width: 100%
@@ -50,6 +54,7 @@
   list-style: none
   padding: 0
   margin: 0
+  font-size: 14.3px
 
 .item
   &:hover

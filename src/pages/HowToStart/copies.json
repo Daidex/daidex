@@ -1,5 +1,18 @@
 {
-  "step_1": "Para poder usar Daidex necesitas tener la wallet de MetaMask en el navegador, puedes instalarla e intentar de nuevo.",
-  "step_2": "Para poder usar Daidex necesitas tener desbloqueada tu wallet de MetaMask, desbloqueala para continuar.",
-  "step_3": "Tu wallet esta en una red de pruebas, cambia a Mainnet para poder usar Daidex."
+  "step_1": {
+    "title": "Conecta tu Wallet.",
+    "description": "Actualmente Daidex soporta la wallet de MetaMask (si no cuentas con ella, descárgala aquí). Asegúrate de que tu wallet esté desbloqueada y conectada a la red principal de Ethereum."
+  },
+  "step_2": {
+    "title": "Convierte Ether en Wrapped Ether.",
+    "description": "Wrapped Ether (o WETH) es la versión intercambiable del Ether (ETH) y la que usarás en Daidex para comprar o vender otros tokens. Puedes convertir la cantidad de ETH en WETH cuantas veces lo necesites y viceversa, pasar de WETH a ETH. 1 WETH equivale a 1 ETH."
+  },
+  "step_3": {
+    "title": "Habilita WETH (y otros tokens) para trading.",
+    "description": "Al habilitar WETH u algún otro token para trading, permites a Daidex que los fondos de dicho token puedan salir de tu wallet al realizar trading (la compra/venta de WETH por algún otro token)."
+  },
+  "step_4": {
+    "title": "!Listo!",
+    "description": "Una vez que has desbloqueado tus tokens para hacer trading, puedes intercambiarlos a los mejores precios del mercado."
+  }
 }
