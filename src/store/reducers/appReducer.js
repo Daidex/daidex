@@ -8,6 +8,8 @@ import {
   SET_MESSAGE_WRAP,
   UPDATE_ALLOWENCE,
   SET_CURRENCY_EXCHANGE,
+  SET_DROPDOWN_OPTION,
+  UPDATE_ORDERBOOK,
 } from 'src/store/actions/appActions'
 import { reduce, isUndefined, get } from 'lodash'
 import appStates from 'src/store/states/appStates'
@@ -36,7 +38,9 @@ export const initialState = {
       loaded: false,
       balances: {}
     },
-    currencyRate: {}
+    currencyRate: {},
+    dropdown: {},
+    orderbook: {},
   }
 }
 
@@ -44,12 +48,16 @@ const allowedNetworks = {
   1: {
     id: 1,
     name: 'Mainnet',
-    tokens: tokensByNetwork.Mainnet
+    tokens: tokensByNetwork.Mainnet,
+    radarRelayApi: 'https://api.radarrelay.com/0x/v0/',
+    websocket: 'wss://ws.radarrelay.com/0x/v0/ws',
   },
   42: {
     id: 42,
     name: 'Kovan',
     tokens: tokensByNetwork.Kovan,
+    radarRelayApi: 'https://api.kovan.radarrelay.com/0x/v0/',
+    websocket: 'wss://ws.kovan.radarrelay.com/0x/v0/ws',
   }
 }
 
@@ -132,6 +140,22 @@ export default function appReducer(state = initialState, action = {}) {
     case SET_CURRENCY_EXCHANGE:
       return setToState(state, {
         'data.currencyRate': action.payload.tokens
+      })
+
+    case SET_DROPDOWN_OPTION:
+      return setToState(state, {
+        'data.dropdown': {
+          ...state.data.dropdown,
+          [action.payload.key]: action.payload.value,
+        }
+      })
+
+    case UPDATE_ORDERBOOK:
+      return setToState(state, {
+        'data.orderbook': {
+          ...state.data.orderbook,
+          [action.payload.token]: action.payload.orderbook
+        }
       })
 
     default:

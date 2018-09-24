@@ -111,6 +111,7 @@ class Dropdown extends Component {
     return (
       <Row
         className={classNames}
+        spacing={{ top: 0, bottom: 0 }}
         role="combobox"
         aria-controls="listbox"
         aria-expanded={this.state.open}
