@@ -50,7 +50,7 @@ const Header = ({
           connected && (
             <Link
               theme="inline"
-              to="/how-to-start"
+              to="/exchange"
             >
               <img src={meta_logo} alt="logo metamask" />
               <span>
