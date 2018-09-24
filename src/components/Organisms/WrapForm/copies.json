@@ -7,7 +7,7 @@
   },
   "unwrap": {
     "title": "Unwrap WETH",
-    "description": "Puedes convertir WETH nuevamente en ETH en cualquier momento.",
+    "description": "Puedes convertir WETH nuevamente a ETH en cualquier momento.",
     "symbol": "WETH",
     "antonym": "ETH"
   }
