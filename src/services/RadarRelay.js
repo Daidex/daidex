@@ -5,15 +5,10 @@ export default class RadarRelay {
     this.baseURL = baseURL
   }
 
-  getOrderbookAsync(quote_token_address, base_token_address) {
+  getOrderbookAsync(params) {
     const url = `${this.baseURL}orderbook`
 
-    return axios.get(url, {
-      params: {
-        baseTokenAddress: base_token_address,
-        quoteTokenAddress: quote_token_address,
-      }
-    })
+    return axios.get(url, { params })
   }
 
   getTokenPairsAsync(baseToken) {

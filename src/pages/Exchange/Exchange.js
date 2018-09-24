@@ -16,6 +16,7 @@ import {
   updateBalances,
   setMessageWrap,
   getCurrencyExchange,
+  subscribeToOrderbook,
 } from 'src/store/actions/appActions'
 
 import Row from 'src/components/Atoms/Row'
@@ -62,6 +63,7 @@ class Exchange extends Component {
     initExchange: PropTypes.func.isRequired,
     setMessageWrap: PropTypes.func.isRequired,
     getCurrencyExchange: PropTypes.func.isRequired,
+    subscribeToOrderbook: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -126,12 +128,13 @@ class Exchange extends Component {
 
   init = (address) => {
     const {
-      network: { tokens },
+      network: { tokens, websocket },
     } = this.props
 
     const tokensKeys = Object.keys(tokens)
     this.props.initExchange(address)
     this.props.getCurrencyExchange(tokensKeys)
+    this.props.subscribeToOrderbook(websocket, tokens)
     this.getBalance(address)
 
     tokensKeys.forEach((token) => {
@@ -287,7 +290,10 @@ class Exchange extends Component {
               <TradeTable
                 openWrapModal={this.openWrapModal}
               />
-              <TradeForm className={styles.form} />
+              <TradeForm
+                className={styles.form}
+                updateTokenBalance={this.getBalance}
+              />
             </Row>
           ) : <MetaMaskWithError view={view} />
         }
@@ -313,6 +319,7 @@ const mapDispatchToProps = dispatch => (
     updateBalances,
     setMessageWrap,
     getCurrencyExchange,
+    subscribeToOrderbook,
   }, dispatch)
 )
 
