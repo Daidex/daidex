@@ -268,7 +268,10 @@ class Exchange extends Component {
     const { view } = this.props
     return (
       <Row>
-        <Header />
+        <Header
+          connected={!!this.props.wallet.address}
+          address={this.props.wallet.address}
+        />
         <Modal
           isVisible={(
             view === appStates.view.exchangeWrap
