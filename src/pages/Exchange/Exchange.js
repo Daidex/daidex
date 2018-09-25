@@ -25,6 +25,7 @@ import TradeTable from 'src/components/Organisms/TradeTable'
 import TradeForm from 'src/components/Organisms/TradeForm'
 import MetaMaskWithError from 'src/components/Organisms/MetaMaskWithError'
 import Modal from 'src/components/Molecules/Modal'
+import Warning from 'src/components/Molecules/Warning'
 import WrapForm from 'src/components/Organisms/WrapForm'
 
 import appStates from 'src/store/states/appStates'
@@ -285,6 +286,16 @@ class Exchange extends Component {
             balances={this.props.wallet.balances}
             message={this.props.wrap_message}
             setMessageWrap={this.props.setMessageWrap}
+          />
+        </Modal>
+        <Modal
+          isVisible
+          onCloseModal={() => {}}
+        >
+          <Warning
+            type="success"
+            title="Transacción Exitosa"
+            onClose={() => {}}
           />
         </Modal>
         {!this.shouldShowMetaMaskError(view)
