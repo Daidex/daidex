@@ -16,6 +16,7 @@ export const SET_CURRENCY_EXCHANGE = '@app/SET_CURRENCY_EXCHANGE'
 export const SET_DROPDOWN_OPTION = '@app/SET_DROPDOWN_OPTION'
 export const SUBSCRIBE_TO_ORDERBOOK = '@app/SUBSCRIBE_TO_ORDERBOOK'
 export const UPDATE_ORDERBOOK = '@app/UPDATE_ORDERBOOK'
+export const SET_MESSAGE_WARN = '@app/SET_MESSAGE_WARN'
 
 const toggleLoadingAction = createAction(TOGGLE_LOADING)
 const changeViewAction = createAction(CHANGE_VIEW)
@@ -29,6 +30,7 @@ const setCurrentExchageAction = createAction(SET_CURRENCY_EXCHANGE)
 const setDropdownOptionAction = createAction(SET_DROPDOWN_OPTION)
 const subscribeToOrderbookAction = createAction(SUBSCRIBE_TO_ORDERBOOK)
 const updateOrderbookAction = createAction(UPDATE_ORDERBOOK)
+const setMessageWarnAction = createAction(SET_MESSAGE_WARN)
 
 export const toggleLoading = isLoading => toggleLoadingAction({ isLoading })
 export const changeView = nextView => changeViewAction({ nextView })
@@ -37,6 +39,7 @@ export const initExchange = address => initExchangeAction({ address })
 export const updateAccount = ({ address }) => updateAccountAction({ address })
 export const updateBalances = balances => updateBalancesAction({ balances })
 export const setMessageWrap = message => setMessageWrapAction({ message })
+export const setMessageWarn = data => setMessageWarnAction({ data })
 export const updateAllowence = ({ tokenSymbol, state }) => {
   return updateAllowenceAction({ tokenSymbol, state })
 }

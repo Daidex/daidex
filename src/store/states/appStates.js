@@ -7,6 +7,7 @@ export default {
     exchange: 'exchange',
     exchangeWithError: 'exchangeWithError',
     exchangeWrap: 'exchangeWrap',
-    exchangeUnWrap: 'exchangeUnWrap'
+    exchangeUnWrap: 'exchangeUnWrap',
+    exchangeWarning: 'exchangeWarning',
   }
 };

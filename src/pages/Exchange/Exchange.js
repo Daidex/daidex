@@ -17,6 +17,7 @@ import {
   setMessageWrap,
   getCurrencyExchange,
   subscribeToOrderbook,
+  setMessageWarn,
 } from 'src/store/actions/appActions'
 
 import Row from 'src/components/Atoms/Row'
@@ -56,6 +57,7 @@ class Exchange extends Component {
       type: PropTypes.string,
       msg: PropTypes.string,
     }).isRequired,
+    warn_message: PropTypes.object.isRequired,
     previousView: PropTypes.string.isRequired,
     changeView: PropTypes.func.isRequired,
     setNetwork: PropTypes.func.isRequired,
@@ -65,6 +67,7 @@ class Exchange extends Component {
     setMessageWrap: PropTypes.func.isRequired,
     getCurrencyExchange: PropTypes.func.isRequired,
     subscribeToOrderbook: PropTypes.func.isRequired,
+    setMessageWarn: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -202,6 +205,10 @@ class Exchange extends Component {
     )
   }
 
+  openMessageWarn = () => {
+    this.props.changeView(appStates.view.exchangeWarning)
+  }
+
   actionWrapUnwrap = async (values) => {
     const wrap = this.props.view === appStates.view.exchangeWrap
     const amount = parseFloat(values.coin)
@@ -289,13 +296,16 @@ class Exchange extends Component {
           />
         </Modal>
         <Modal
-          isVisible
-          onCloseModal={() => {}}
+          isVisible={(
+            view === appStates.view.exchangeWarning
+          )}
+          onCloseModal={this.closeWrapModal}
         >
           <Warning
-            type="success"
-            title="Transacción Exitosa"
-            onClose={() => {}}
+            type={this.props.warn_message.type}
+            title={this.props.warn_message.title}
+            payload={this.props.warn_message.payload}
+            onClose={this.closeWrapModal}
           />
         </Modal>
         {!this.shouldShowMetaMaskError(view)
@@ -307,6 +317,8 @@ class Exchange extends Component {
               <TradeForm
                 className={styles.form}
                 updateTokenBalance={this.getBalance}
+                setMessageWarn={this.props.setMessageWarn}
+                openMessageWarn={this.openMessageWarn}
               />
             </Row>
           ) : <MetaMaskWithError view={view} />
@@ -322,6 +334,7 @@ const mapStateToProps = state => ({
   wallet: state.app.data.wallet,
   network: state.app.data.network,
   wrap_message: state.app.ui.wrap.message,
+  warn_message: state.app.ui.warnMessage,
 })
 
 const mapDispatchToProps = dispatch => (
@@ -334,6 +347,7 @@ const mapDispatchToProps = dispatch => (
     setMessageWrap,
     getCurrencyExchange,
     subscribeToOrderbook,
+    setMessageWarn,
   }, dispatch)
 )
 

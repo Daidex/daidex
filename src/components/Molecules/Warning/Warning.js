@@ -11,6 +11,8 @@ import styles from './WarningStyles.sass'
 const Warning = ({
   type,
   title,
+  payload,
+  onClose,
 }) => {
   return type === 'success' ? (
     <Row className={styles.container}>
@@ -36,15 +38,13 @@ const Warning = ({
         </Link>
       </Row>
       <Row>
-        <Button theme="primary">
-          OK
-        </Button>
+        <Button theme="primary" onClick={onClose}>OK</Button>
       </Row>
     </Row>
   ) : (
     <Row className={styles.container}>
       <Row>
-        <Text theme="h2">Error en la Transacción</Text>
+        <Text theme="h2">{title}</Text>
       </Row>
       <Row>
         <Text theme="h3" style={{ color: 'white' }}>Transacción no Realizada</Text>
@@ -52,11 +52,11 @@ const Warning = ({
       <Row>
         <Text theme="h3" style={{ color: 'white' }}>Descripcion:</Text>
         <Text style={{ color: 'red' }}>
-          BATCH_ORDERS_MUST_HAVE_AT_LEAST_ONE_ITEM
+          {payload.error}
         </Text>
       </Row>
       <Row>
-        <Button theme="primary">OK</Button>
+        <Button theme="primary" onClick={onClose}>OK</Button>
       </Row>
     </Row>
   )
@@ -65,6 +65,8 @@ const Warning = ({
 Warning.propTypes = {
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  payload: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
 }
 
 export default Warning

@@ -41,6 +41,8 @@ class TradeForm extends Component {
     orderbook: PropTypes.object.isRequired, // eslint-disable-line
     updateTokenBalance: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    openMessageWarn: PropTypes.func.isRequired,
+    setMessageWarn: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -124,6 +126,8 @@ class TradeForm extends Component {
       invalid,
       submitting,
       accountAddress,
+      openMessageWarn,
+      setMessageWarn,
       dropdown: { takerChoice, makerChoice },
     } = this.props
 
@@ -137,6 +141,12 @@ class TradeForm extends Component {
           tokenA,
         })
         console.log('response yay', response)
+        setMessageWarn({
+          type: 'success',
+          title: 'Transacción Exitosa',
+          payload: {}
+        })
+        openMessageWarn()
 
         setTimeout(() => {
           this.props.updateTokenBalance(accountAddress, takerChoice)
@@ -144,6 +154,14 @@ class TradeForm extends Component {
         }, 2000)
       } catch (error) {
         console.error(error)
+        setMessageWarn({
+          type: error.name.toLocaleLowerCase(),
+          title: 'Error Lorem Ipsum',
+          payload: {
+            error: error.message
+          }
+        })
+        openMessageWarn()
       }
     }
   }
