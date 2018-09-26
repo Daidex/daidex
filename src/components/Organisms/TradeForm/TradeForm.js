@@ -144,7 +144,14 @@ class TradeForm extends Component {
         setMessageWarn({
           type: 'success',
           title: 'Transacción Exitosa',
-          payload: {}
+          payload: {
+            amountToReceive: this.state.amountToReceive,
+            amountToPaid: values.taker,
+            fillTxHash: response.fillTxHash,
+            symbolToPaid: takerChoice,
+            symbolToReceive: makerChoice,
+            netId: this.props.network.id
+          }
         })
         openMessageWarn()
 

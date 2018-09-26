@@ -70,7 +70,8 @@ export default class ExchangeTrader {
         const res = await this.zeroEx.awaitTransactionMinedAsync(fillTxHash, 1500)
         const transactionData = {
           amountReceived: ZeroEx.toUnitAmount(res.logs[2].args.filledMakerTokenAmount, TOKEN_DECIMALS),
-          amountPaid: ZeroEx.toUnitAmount(res.logs[2].args.filledTakerTokenAmount, TOKEN_DECIMALS)
+          amountPaid: ZeroEx.toUnitAmount(res.logs[2].args.filledTakerTokenAmount, TOKEN_DECIMALS),
+          fillTxHash
         }
 
         resolve(transactionData)
@@ -127,7 +128,7 @@ export default class ExchangeTrader {
           const takerFilledAmount = await this.zeroEx.exchange.getFilledTakerAmountAsync(
             ZeroEx.getOrderHashHex(bidOrder)
           )
-  
+
           if (bidOrder.takerTokenAmount != takerFilledAmount) {
             if (bidOrder.takerTokenAmount.lte(takerTokenAmount)) {
               result.push({ signedOrder: bidOrder, takerTokenFillAmount: bidOrder.takerTokenAmount })
@@ -143,7 +144,7 @@ export default class ExchangeTrader {
           const takerFilledAmount = await this.zeroEx.exchange.getFilledTakerAmountAsync(
             ZeroEx.getOrderHashHex(askOrder)
           )
-  
+
           if (askOrder.takerTokenAmount != takerFilledAmount) {
             if (askOrder.takerTokenAmount.lte(takerTokenAmount)) {
               result.push({ signedOrder: askOrder, takerTokenFillAmount: askOrder.takerTokenAmount })

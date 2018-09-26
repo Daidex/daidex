@@ -7,6 +7,22 @@ import Button from 'src/components/Atoms/Button'
 import Row from 'src/components/Atoms/Row'
 
 import styles from './WarningStyles.sass'
+import copies from './copies.json'
+
+const etherscanURL = (hash, netId) => {
+  switch (netId) {
+    case 1:
+      return `https://etherscan.io/tx/${hash}`
+    case 42:
+      return `https://kovan.etherscan.io/tx/${hash}`
+    default:
+      return `https://etherscan.io/tx/${hash}`
+  }
+}
+
+const showError = (error) => {
+  return copies[error] ? copies[error] : error
+}
 
 const Warning = ({
   type,
@@ -21,16 +37,22 @@ const Warning = ({
       </Row>
       <Row>
         <Text theme="h3" style={{ color: 'white' }}>Cantidad Recibida:</Text>
-        <Text style={{ color: 'white' }}>0.001 ZRX</Text>
+        <Text style={{ color: 'white' }}>
+          {`${payload.amountToReceive} ${payload.symbolToReceive}`}
+        </Text>
       </Row>
       <Row>
         <Text theme="h3" style={{ color: 'white' }}>Cantidad Pagada:</Text>
-        <Text style={{ color: 'white' }}>0.0001 WETH</Text>
+        <Text style={{ color: 'white' }}>
+          {`${payload.amountToPaid} ${payload.symbolToPaid}`}
+        </Text>
       </Row>
       <Row>
-        <Text theme="h3" style={{ color: 'white' }}>Ver Detalles de la Transacción:</Text>
+        <Text theme="h3" style={{ color: 'white' }}>
+          Ver Detalles de la Transacción:
+        </Text>
         <Link
-          href="https://coinbtr.com/"
+          href={etherscanURL.call(null, payload.fillTxHash, payload.netId)}
           target="blank"
           style={{ color: 'orange' }}
         >
@@ -52,7 +74,9 @@ const Warning = ({
       <Row>
         <Text theme="h3" style={{ color: 'white' }}>Descripcion:</Text>
         <Text style={{ color: 'red' }}>
-          {payload.error}
+          {
+            showError(payload.error)
+          }
         </Text>
       </Row>
       <Row>

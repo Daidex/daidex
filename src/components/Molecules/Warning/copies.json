@@ -1,0 +1,9 @@
+{
+  "INSUFFICIENT_TAKER_FEE_BALANCE": "No cuentas con ETH suficiente para pagar la comisión de transacción.",
+  "ORDER_FILL_EXPIRED": "La orden que se está intentando llenar ha expirado. Por favor intenta nuevamente.",
+  "ORDER_CANCELLED": "La orden que se está intentando llenar ha sido cancelada. Por favor intenta nuevamente.",
+  "ORDER_CANCEL_EXPIRED": "La orden que se está intentando llenar ha sido cancelada. Por favor intenta nuevamente.",
+  "INSUFFICIENT_TAKER_BALANCE": "No cuentas con suficiente balance para realizar esta transacción.",
+  "INSUFFICIENT_TAKER_FEE_ALLOWANCE": "No cuentas con suficiente balance para pagar la comisión de esta transacción.",
+  "BATCH_ORDERS_MUST_HAVE_AT_LEAST_ONE_ITEM": "Por el momento no hay órdenes de compra/venta en este mercado."
+}
