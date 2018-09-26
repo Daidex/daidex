@@ -10,6 +10,7 @@ import {
   SET_CURRENCY_EXCHANGE,
   SET_DROPDOWN_OPTION,
   UPDATE_ORDERBOOK,
+  SET_MESSAGE_WARN,
 } from 'src/store/actions/appActions'
 import { reduce, isUndefined, get } from 'lodash'
 import appStates from 'src/store/states/appStates'
@@ -28,6 +29,11 @@ export const initialState = {
         msg: '',
         type: '',
       }
+    },
+    warnMessage: {
+      type: '',
+      title: '',
+      payload: {},
     }
   },
   data: {
@@ -156,6 +162,11 @@ export default function appReducer(state = initialState, action = {}) {
           ...state.data.orderbook,
           [action.payload.token]: action.payload.orderbook
         }
+      })
+
+    case SET_MESSAGE_WARN:
+      return setToState(state, {
+        'ui.warnMessage': action.payload.data
       })
 
     default:

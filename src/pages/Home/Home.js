@@ -21,19 +21,21 @@ class Home extends Component {
             <img src={logo} width={180} alt="Daidex logo" />
           </Row>
           <Text theme="h1" className={styles.title}>
-            Trade ERC20 tokens using your own wallet
+            Intercambia ERC-20 Ethereum Tokens desde tu propia wallet
           </Text>
           <Row spacing={{ top: 10, bottom: 10 }}>
             <Text className={styles.description}>
-              Simple, fast and realiable solution to trade ERC-20 tokenscross entire Etherium network without risk.
+              Daidex, la forma más efectiva, segura y rápida de intercambiar
+              tokens ERC-20 en la red de Ethereum sin riesgo alguno y a
+              los mejores precios del mercado.
             </Text>
           </Row>
           <Row>
             <Button theme="primary" to="/exchange">
-              TAKE ME IN
+              Ir a Exchange
             </Button>
             <Button theme="primary" to="/how-to-start">
-              COMO EMPEZAR
+              Como Empezar
             </Button>
           </Row>
         </Col>
