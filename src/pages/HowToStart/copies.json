@@ -9,10 +9,10 @@
   },
   "step_3": {
     "title": "Habilita WETH (y otros tokens) para trading.",
-    "description": "Al habilitar WETH u algún otro token para trading, permites a Daidex que los fondos de dicho token puedan salir de tu wallet al realizar trading (la compra/venta de WETH por algún otro token)."
+    "description": "Al habilitar WETH o algún otro token para trading, permites a Daidex que los fondos de dicho token puedan salir de tu wallet al realizar trading (la compra/venta de WETH por algún otro token)."
   },
   "step_4": {
-    "title": "!Listo!",
+    "title": "¡Listo!",
     "description": "Una vez que has desbloqueado tus tokens para hacer trading, puedes intercambiarlos a los mejores precios del mercado."
   }
 }

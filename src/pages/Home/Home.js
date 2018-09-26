@@ -35,7 +35,7 @@ class Home extends Component {
               Ir a Exchange
             </Button>
             <Button theme="primary" to="/how-to-start">
-              Como Empezar
+              Cómo Empezar
             </Button>
           </Row>
         </Col>

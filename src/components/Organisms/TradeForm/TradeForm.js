@@ -163,7 +163,7 @@ class TradeForm extends Component {
         console.error(error)
         setMessageWarn({
           type: error.name.toLocaleLowerCase(),
-          title: 'Error Lorem Ipsum',
+          title: 'Error en la transacción',
           payload: {
             error: error.message
           }

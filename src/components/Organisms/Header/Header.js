@@ -24,9 +24,14 @@ const Header = ({
 
   return (
     <header className={classNames} {...rest}>
-      <Row>
-        <img src={logo} width={130} alt="Daidex logo" />
-      </Row>
+      <Link
+        theme="inline"
+        to="/"
+      >
+        <Row>
+          <img src={logo} width={130} alt="Daidex logo" />
+        </Row>
+      </Link>
       <Navbar>
         <Link
           theme="inline"
@@ -44,7 +49,7 @@ const Header = ({
           theme="inline"
           to="/how-to-start"
         >
-          Como empezar
+          Cómo empezar
         </Link>
         {
           connected && (
